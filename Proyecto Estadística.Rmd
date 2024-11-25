@@ -1,8 +1,60 @@
 ---
-title: "Proyecto ANGELA"
+title: "Proyecto Estadística"
 output: html_document
 date: "2024-11-25"
 ---
+
+![](images/istockphoto-1688506060-1024x1024.jpg)
+
+# EDA: Importaciones en Colombia pre, durante y post pandemia de Covid-19
+
+## **1. Introducción**
+
+-   **1.1.** Planteamiento
+
+Las importaciones de un país pueden ser el reflejo del estado del mismo, tanto de su economía como de su situación interna, en nuestra exploración de datos observamos la mayoria de datos que tenemos son cualittivos y muy pocos son cuantitativos. La base de datos del IDEAM nos proporciona archivos de datos desde 2012 hasta 2024, donde al analizar lor archivos y sus tipos de datos nos parecio curioso análizar la situación del país en los años de pandemia, las importaciones en la pandemia, 2019 - 2022 podrían darnos una figura de como se manejó el país pre-pandemia, durante pandemia y pos-pandemia; Queremos ver y descubrir como este evento global afectó a nuestro país desde el comportamiento de las importaciones como la afección a los departamentos y ciudades más relevantes del tema.
+
+Por lo que principalmente analizaremos estadistica como: ¿Qué departamento recibe más importaciones?, precios de las mercancias que entraban, cantidad de unidades, que departementos tuvieron menos importaciones, etc. Donde nuestras diversas hipótesis son: ¿La pandemia en realidad afecto las imprtaciones? ¿que tan significativa fué?
+
+-   **1.2.** Abordamiento
+
+Iniciamos abordando el problema desde el análisis y comprensión de los datos que estabamos manejando, entender qué significaban sus siglas, que tipos de datos teníamos para trabajar y posteriormente como podíamos presentarlos de modo que reflejarán la situación del contexto.
+
+La metodología se basó en organizar que tipo de gráficas queríamos llegar a obtener, por ejemplo la frecuencia de las ciudades receptoras de mercancias por meses donde la gráfica completa mostraría el año total; los cálculos que podríamos lograr con los datos que teníamos y su relevancia para el contexto, por ejemplo el promedio y la mediana del costo de las mercancias que llegaban a cada ciudad receptora o por ejemplo de que si llegaba una mercancia a Bogotá cuál es la probabilidad de que esa mercancia sea de un páis exacto. Así sucesivamente fuimos revisando la teoría vista en clase porque nuestra misión es aplicar lo visto en el curso, por lo qué a medida de que vamos avanzando esperamos obtener más ideas de datos relevantes a analizar.
+
+Por otro lado la creación de estos gráficos y cálculos, se baso en entrar primero al csv original desde una vista de excel e ir identificando que tan limpios estaban los datos y ver que datos debiamos filtrar o cambiar si era necesario, por ejemplo, para la grafica de frecuencia de las ciudades receptoras iniciamos contanto cuantas veces aparecian estas ciduades por mes desde el dato de *LUIN* cuando nos percatamos que habían casillas unas todas mayusculas, otras todas minusculas y otras revueltas, mientras que la columnas *CODLUIN* si nos proporcionaba el dato más limpio ya que todos estaban en mayuscula con los diminutivos de las ciudades... así entonces procedimos a ir por cada csv extrayendo la información limpia y guardandola en un data frame para posteriormente crear la gráfica. El proceso se repetía en cada objetivo que teníamos.
+
+
+-   **1.3.** Enfoque/técnica analítica
+
+Actualmente nuestra analitica se basa en tener gráficas que nos ayuden a mostrar como se comportaron las importaciones durante los años de pandemia. Iniciamos con los datos más básicos que nos brinda la base y seguido de esto esperamos sacar probabilidades y conjeturas de cuales fueron los departamentos donde hubo una mayor reducción de las actividades.
+
+
+-   **1.4.** Beneficios al consumidor
+
+Esperamos que nuestro análisis ayude al consumidor a ver como las mercancias se comportan en una época de crisis, en qué ciudades receptoras se incrementaron los aranceles y por ende se incrementaron los precios y cuales fueron esos puntos de quiebre que hicieron que los precios se dispararon para poder tener un mejr maneja sobre importaciones en futuras crisis.
+
+## **2. Paquetes de R**
+
+TERMINAR
+
+## **3. Preparación de los datos**
+
+-   **3.1.** Obtecnión original de los datos
+
+La base de datos utilizada durante el estudio fue obtenida a través de los recursos virtuales del departamento nacional de estdística (DANE), la cual proporciona datos publicos en su servicio de *archivo nacional de datos (ANDA)*, donde nos enontramos con un catálogo de nichos de los cuales se proporcionaban archivos .CSV con datos de interés; entre las categorías nos inclinamos por la colección de economia-microdatos, por el nicho de economía internacional, donde entre la lista de opciones de censos nos cautivo las *Estadísticas de Importaciones - IMPO - 2012 A 2024* (<https://microdatos.dane.gov.co/index.php/catalog/473/get-microdata>).
+
+-   **3.2.** Explicación de datos originales
+
+Los datos fueron recolectados por el DANE bajo la necesidad de asegurar la veracidad y la imparcialidad de la información básica y estratégica del país para satisfacer las necesidades y las exigencias de las personas, las instituciones y los organismos nacionales e internacionales dedicados a investigaciones relacionadas con la compra de mercancías del exterior.
+
+Estos microdatos registran la entrada de importaciones con mercancías legales provenientes de otro país o desde una zona franca colombiana, al resto del territorio aduanero nacional. Estas cifras se producen con base en las declaraciones de importaciones presentadas ante las diferentes administraciones de aduanas del país y se registran estadísticamente según la fecha de presentación de las declaraciones de importación ante las entidades financieras autorizadas para recaudar los tributos aduaneros. Las cifras de las importaciones colombianas son producidas por la Dirección de Impuestos y Aduanas Nacionales (DIAN).
+
+Cada uno de los archivos de datos proporcionados por el DANE en el servicio de ANDA, tiene un total de 44 variables, donde 20 son discretas y 24 son continuas; para la cantidad de variablees el ANDA proprciona un dicconario de dato donde se puede evidenciar que la regla general de los nombres de las variables son acrónimos de su significado sencillos de interpretar.
+
+Lo que más nos parecio cursioso de los archivos es que ningún dice específicamente de qué es la mercancía, no se evidencia alguna categoría o clasificación del material de entrada como decir "tecnología", "jugeuetria", "maquinaria", "textil", etc... No lo hay, solo colocan el nombre de la empresa colombiana a quién pertenece la mercancía y ni siquiera se habla explicitamente de "Empresa" se les asigna la variable de Razon social del importador (RZIMPO). Algo que también nos parecio curioso es que hay dos variables llamadas Pais de Procedencia (PAISPRO) y Pais de Compra (PAISCOM), que a veces son iguales pero en la mayoría de casos es diferente lo que hace pensar que muchas mercancías son hechas en un país (PAISPRO) y son vendidas desde otros pais (PAISCOM), nos parecio curioso. Ya por último, nos pareció curioso que guaurdan los datos de las banderas del transporte de la mercancía: Bandera (BANDERA).
+
+COLOCAR TABLA
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
