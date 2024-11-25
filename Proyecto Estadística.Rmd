@@ -24,11 +24,9 @@ La metodología se basó en organizar que tipo de gráficas queríamos llegar a 
 
 Por otro lado la creación de estos gráficos y cálculos, se baso en entrar primero al csv original desde una vista de excel e ir identificando que tan limpios estaban los datos y ver que datos debiamos filtrar o cambiar si era necesario, por ejemplo, para la grafica de frecuencia de las ciudades receptoras iniciamos contanto cuantas veces aparecian estas ciduades por mes desde el dato de *LUIN* cuando nos percatamos que habían casillas unas todas mayusculas, otras todas minusculas y otras revueltas, mientras que la columnas *CODLUIN* si nos proporcionaba el dato más limpio ya que todos estaban en mayuscula con los diminutivos de las ciudades... así entonces procedimos a ir por cada csv extrayendo la información limpia y guardandola en un data frame para posteriormente crear la gráfica. El proceso se repetía en cada objetivo que teníamos.
 
-
 -   **1.3.** Enfoque/técnica analítica
 
 Actualmente nuestra analitica se basa en tener gráficas que nos ayuden a mostrar como se comportaron las importaciones durante los años de pandemia. Iniciamos con los datos más básicos que nos brinda la base y seguido de esto esperamos sacar probabilidades y conjeturas de cuales fueron los departamentos donde hubo una mayor reducción de las actividades.
-
 
 -   **1.4.** Beneficios al consumidor
 
@@ -48,34 +46,147 @@ La base de datos utilizada durante el estudio fue obtenida a través de los recu
 
 Los datos fueron recolectados por el DANE bajo la necesidad de asegurar la veracidad y la imparcialidad de la información básica y estratégica del país para satisfacer las necesidades y las exigencias de las personas, las instituciones y los organismos nacionales e internacionales dedicados a investigaciones relacionadas con la compra de mercancías del exterior.
 
-Estos microdatos registran la entrada de importaciones con mercancías legales provenientes de otro país o desde una zona franca colombiana, al resto del territorio aduanero nacional. Estas cifras se producen con base en las declaraciones de importaciones presentadas ante las diferentes administraciones de aduanas del país y se registran estadísticamente según la fecha de presentación de las declaraciones de importación ante las entidades financieras autorizadas para recaudar los tributos aduaneros. Las cifras de las importaciones colombianas son producidas por la Dirección de Impuestos y Aduanas Nacionales (DIAN).
+Estos microdatos registran la entrada de importaciones con mercancías legales provenientes de otro país o desde una zona franca colombiana, al resto del territorio aduanero nacional. Estas cifras se producen con base en las declaraciones de importaciones presentadas ante las diferentes administraciones de aduanas del país y se registran estadísticamente según la fecha de presentación de las declaraciones de importación ante las entidades financieras autorizadas para recaudar los tributos aduaneros. Las cifras de las importaciones colombianas son producidas por la Dirección de Impuestos y Aduanas Nacionales (DIAN). Con un modo de recolección de autodiligenciamiento de formulario electrónico vía página web (por selección; por ejemplo en encuestas por muestreo o censos)
 
 Cada uno de los archivos de datos proporcionados por el DANE en el servicio de ANDA, tiene un total de 44 variables, donde 20 son discretas y 24 son continuas; para la cantidad de variablees el ANDA proprciona un dicconario de dato donde se puede evidenciar que la regla general de los nombres de las variables son acrónimos de su significado sencillos de interpretar.
 
-Lo que más nos parecio cursioso de los archivos es que ningún dice específicamente de qué es la mercancía, no se evidencia alguna categoría o clasificación del material de entrada como decir "tecnología", "jugeuetria", "maquinaria", "textil", etc... No lo hay, solo colocan el nombre de la empresa colombiana a quién pertenece la mercancía y ni siquiera se habla explicitamente de "Empresa" se les asigna la variable de Razon social del importador (RZIMPO). Algo que también nos parecio curioso es que hay dos variables llamadas Pais de Procedencia (PAISPRO) y Pais de Compra (PAISCOM), que a veces son iguales pero en la mayoría de casos es diferente lo que hace pensar que muchas mercancías son hechas en un país (PAISPRO) y son vendidas desde otros pais (PAISCOM), nos parecio curioso. Ya por último, nos pareció curioso que guaurdan los datos de las banderas del transporte de la mercancía: Bandera (BANDERA).
+Lo que más nos parecio cursioso de los archivos es que ningún dice específicamente de qué es la mercancía, no se evidencia alguna categoría o clasificación del material de entrada como decir "tecnología", "jugeuetria", "maquinaria", "textil", etc... No lo hay, solo colocan el nombre de la empresa colombiana a quién pertenece la mercancía y ni siquiera se habla explicitamente de "Empresa" se les asigna la variable de Razon social del importador (RZIMPO). Algo que también nos parecio curioso es que hay dos variables llamadas Pais de Procedencia (PAISPRO) y Pais de Compra (PAISCOM), que a veces son iguales pero en la mayoría de casos es diferente lo que hace pensar que muchas mercancías son hechas en un país (PAISPRO) y son vendidas desde otros pais (PAISCOM), nos parecio curioso.
 
-COLOCAR TABLA
+| Variable   | Descripción                         |
+|------------|-------------------------------------|
+| FECH       | Fecha de proceso                    |
+| ADUA       | Código de la aduana                 |
+| PAISGEN    | País origen                         |
+| PAISPRO    | País de procedencia                 |
+| PAISCOM    | País de compra                      |
+| DEPTODES   | Departamento destino                |
+| VIATRANS   | Código vía de transporte            |
+| BANDERA    | Bandera                             |
+| REGIMEN    | Código de régimen                   |
+| ACUERDO    | Código del acuerdo                  |
+| PBK        | Peso bruto en kilos                 |
+| PNK        | Peso neto en kilos                  |
+| CANU       | Cantidad de unidades                |
+| CODA       | Código de unidad                    |
+| NABAN      | Posición arancelaria                |
+| VAFODO     | Valor FOB dólares de la mercancía   |
+| FLETE      | Fletes                              |
+| VACID      | Valor CIF dólares de la mercancía   |
+| VACIP      | Valor CIF pesos de la mercancía     |
+| IMP1       | Impuesto a las ventas               |
+| OTDER      | Otros Derechos                      |
+| CLASE      | Clase de importador                 |
+| CUIDAIMP   | Ciudad del importador               |
+| CUIDAEXP   | Ciudad del exportador               |
+| ACTECON    | Actividad económica                 |
+| CODADAD    | Código administración de aduana     |
+| VADUA      | Valor aduana                        |
+| VRAJUS     | Valor ajuste                        |
+| BASEIVA    | Base IVA                            |
+| OTROSP     | Porcentaje otros                    |
+| OTROSBASE  | Base otros                          |
+| TOTALIVAYO | Total IVA y otros gastos            |
+| SEGUROS    | Seguros                             |
+| OTROSG     | Otros gastos                        |
+| LUIN       | Lugar de ingreso                    |
+| CODLUIN    | Código lugar de ingreso             |
+| DEPIM      | Departamento del importador         |
+| COPAEX     | Código país del exportador          |
+| TIPOIM     | Tipo de importación                 |
+| PORARA     | Porcentaje de arancel               |
+| NIT        | Número de identificación Tributaria |
+| DIGV       | Dígito de Verificación              |
+| RZIMPO     | Razón social del importador         |
+| DEREL      | Derechos Arancelarios               |
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
+- **3.3.** Los pasos de importación y limpieza de datos se explican en el texto (dígame por qué realiza las actividades de limpieza de datos que realiza) y siguen un proceso lógico.
+
+Teniendo en cuenta que nos estamos concentrando en encontrar y crear gráficas de información general de 4 años distintos, debemos agradecer al DANE, de que los archivos están muy bien estandarizados, no fue necesario una limpieza tan profunda más que un carcter mayuscula o minúsucula que no iba. Nuestro proceso lógico y repetitivo se baso en tomar los .csv de cadda mes, de cada año e ir extrayendo la información necesaria y guardandola en data frames respectivos de la información.
+
+TERMINAR - - - - - - - - - - - -
+
+- **3.4.** Una vez que sus datos estén limpios, muestre cómo se ve el conjunto de datos final. Sin embargo, no imprima un marco de datos con más de 200 filas; muéstreme los datos en la forma más condensada posible.
+
+CODIGO DE JOSE
+
+- **3.5.** Proporcione información resumida sobre las variables de interés en su conjunto de datos limpios. No se limite a imprimir un montón de fragmentos de código con str(), summary(), etc. Más bien, proporcione una explicación consolidada, ya sea con una tabla que proporcione información resumida para cada variable o un párrafo de resumen.
+
+CODIGO
+
+###Posibles gráficas básicas
+Diagramas de barras para cada uno...
+*   Frecuencias de los paises de procedencia
+*   Frecuencias de los paises de compra
+*   Frecuencias de los ciudades que más exportan hacia colombia
+*   Frecuencias de las cada ciudad que reciben
+*   Cantidad de dinero en mercancias le llegó a cada departamento
+*   Gráfica de torta para las ciudades a donde llega la mercancia, por año, cuanto porcentaje llega a bogotá, a medellin, etc...
+*   Gráfica de medios de transporte y su precio
+
+
+###Posibles cálculos
+*   Ver qué probabilidad hay de que X país de origen nos envién una mercancía a X ciudad
+*   Ver que probabilidad hay de que la mercancia llegue a Bogotá/Medellin/Buenaventura/cali/pererira
+
+*   Promedio, mediana de mercancia por ciudades
+*   Calcular los aranceles de cada aduana -> saber cual fue la más cara y la más económica
+
+
+---------------------------------------------------------- INICIO DE CÓDIGO ----------------------------------------------------------
+```{r}
+#Extraccion de datos 2019
+Enero_2019  <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\1. Enero_2019.csv", sep=";")
+Febrero_2019 <- read.csv()
+Marzo_2019 <- read.csv()
+Abril_2019 <- read.csv()
+Mayo_2019 <- read.csv()
+Junio_2019 <- read.csv()
+Julio_2019 <- read.csv()
+Agosto_2019 <- read.csv()
+Septiembre_2019 <- read.csv()
+Octubre_2019 <- read.csv()
+Noviembre_2019 <- read.csv()
+
+#Extraccion de datos 2020
+Enero_2020  <- read.csv()
+Febrero_2020 <- read.csv()
+Marzo_2020 <- read.csv()
+Abril_2020 <- read.csv()
+Mayo_2020 <- read.csv()
+Junio_2020 <- read.csv()
+Julio_2020 <- read.csv()
+Agosto_2020 <- read.csv()
+Septiembre_2020 <- read.csv()
+Octubre_2020 <- read.csv()
+Noviembre_2020 <- read.csv()
+
+#Extraccion de datos 2021
+Enero_2021  <- read.csv()
+Febrero_2021 <- read.csv()
+Marzo_2021 <- read.csv()
+Abril_2021 <- read.csv()
+Mayo_2021 <- read.csv()
+Junio_2021 <- read.csv()
+Julio_2021 <- read.csv()
+Agosto_2021 <- read.csv()
+Septiembre_2021 <- read.csv()
+Octubre_2021 <- read.csv()
+Noviembre_2021 <- read.csv()
+
+ #Extraccion de datos 2022
+Enero_2022  <- read.csv()
+Febrero_2022 <- read.csv()
+Marzo_2022 <- read.csv()
+Abril_2022 <- read.csv()
+Mayo_2022 <- read.csv()
+Junio_2022 <- read.csv()
+Julio_2022 <- read.csv()
+Agosto_2022 <- read.csv()
+Septiembre_2022 <- read.csv()
+Octubre_2022 <- read.csv()
+Noviembre_2022 <- read.csv()
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
