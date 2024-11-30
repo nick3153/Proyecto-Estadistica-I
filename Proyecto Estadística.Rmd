@@ -1,5 +1,5 @@
 ---
-title: "Proyecto Estadística"
+title: "Proyecto Estadística_Prueba_Jose"
 output: html_document
 date: "2024-11-25"
 ---
