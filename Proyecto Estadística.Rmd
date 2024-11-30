@@ -123,13 +123,18 @@ CODIGO
 ---------------------------------------------------------- INICIO DE CÓDIGO ----------------------------------------------------------
 
 ```{r}
+Enero_2019 <- read.csv("C:/Users/angel/Documents/1. UNIVERSIDAD/5TO SEMESTRE/ESTADISTICA/Proyecto Final/Impo_2019/1. Enero_2019.csv", sep=";")
+
+```
+
+
+
+```{r}
 install.packages("dplyr")
 library(dplyr)
 
 #Extraccion de datos 2019
 Enero_2019  <- read.csv("C:\\Users\\joseq\\Downloads\\Importaciones_Proyecto_Estadistica\\Impo_2019\\Enero\\Enero.csv", sep=";")
-
-
 Febrero_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\2. Febrero_2019.csv", sep=";")
 Marzo_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\3. Marzo_2019.csv", sep=";")
 Abril_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\4. Abril_2019.csv", sep=";")
