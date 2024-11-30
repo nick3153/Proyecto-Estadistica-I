@@ -1,5 +1,5 @@
 ---
-title: "Proyecto Estadística_Prueba_Jose"
+title: "Proyecto Estadística_Prueba Final"
 output: html_document
 date: "2024-11-25"
 ---
@@ -120,8 +120,10 @@ CODIGO
 -   Promedio, mediana de mercancia por ciudades
 -   Calcular los aranceles de cada aduana -\> saber cual fue la más cara y la más económica
 
----------------------------------------------------------- INICIO DE CÓDIGO ----------------------------------------------------------
+TERMINAR DE ARREGLAR TEXTO
 
+---------------------------------------------------------- INICIO DE CÓDIGO ----------------------------------------------------------
+REVVISA ACA JOSE:
 ```{r}
 Enero_2019 <- read.csv("C:/Users/angel/Documents/1. UNIVERSIDAD/5TO SEMESTRE/ESTADISTICA/Proyecto Final/Impo_2019/1. Enero_2019.csv", sep=";")
 
@@ -133,58 +135,66 @@ Enero_2019 <- read.csv("C:/Users/angel/Documents/1. UNIVERSIDAD/5TO SEMESTRE/EST
 install.packages("dplyr")
 library(dplyr)
 
-#Extraccion de datos 2019
-Enero_2019  <- read.csv("C:\\Users\\joseq\\Downloads\\Importaciones_Proyecto_Estadistica\\Impo_2019\\Enero\\Enero.csv", sep=";")
-Febrero_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\2. Febrero_2019.csv", sep=";")
-Marzo_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\3. Marzo_2019.csv", sep=";")
-Abril_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\4. Abril_2019.csv", sep=";")
-Mayo_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\5. Mayo_2019.csv", sep=";")
-Junio_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\6. Junio_2019.csv", sep=";")
-Julio_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\7. Julio_2019.csv",sep=";")
-Agosto_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\8. Agosto_2019.csv",sep=";")
-Septiembre_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\9. Septiembre_2019.csv", sep=";")
-Octubre_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\10. Octubre_2019.csv", sep=";")
-Noviembre_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\11. Noviembre_2019.csv", sep=";")
-Diciembre_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\12. Diciembre_2019.csv", sep=";")
+# Define la ruta base de los arvhivos
+ruta_base <- "C:/Users/angel/Documents/1. UNIVERSIDAD/5TO SEMESTRE/ESTADISTICA/Proyecto Final"
 
-#Extraccion de datos 2020
-Enero_2020  <- read.csv()
-Febrero_2020 <- read.csv()
-Marzo_2020 <- read.csv()
-Abril_2020 <- read.csv()
-Mayo_2020 <- read.csv()
-Junio_2020 <- read.csv()
-Julio_2020 <- read.csv()
-Agosto_2020 <- read.csv()
-Septiembre_2020 <- read.csv()
-Octubre_2020 <- read.csv()
-Noviembre_2020 <- read.csv()
+# Lectura de los archivos 2019
+Enero_2019  <- read.csv(file.path(ruta_base, "Impo_2019/1. Enero_2019.csv"), sep = ";")
+Febrero_2019 <- read.csv(file.path(ruta_base, "Impo_2019/2. Febrero_2019.csv"), sep = ";")
+Marzo_2019 <- read.csv(file.path(ruta_base, "Impo_2019/3. Marzo_2019.csv"), sep = ";")
+Abril_2019 <- read.csv(file.path(ruta_base, "Impo_2019/4. Abril_2019.csv"), sep = ";")
+Mayo_2019 <- read.csv(file.path(ruta_base, "Impo_2019/5. Mayo_2019.csv"), sep = ";")
+Junio_2019 <- read.csv(file.path(ruta_base, "Impo_2019/6. Junio_2019.csv"), sep = ";")
+Julio_2019 <- read.csv(file.path(ruta_base, "Impo_2019/7. Julio_2019.csv"), sep = ";")
+Agosto_2019 <- read.csv(file.path(ruta_base, "Impo_2019/8. Agosto_2019.csv"), sep = ";")
+Septiembre_2019 <- read.csv(file.path(ruta_base, "Impo_2019/9. Septiembre_2019.csv"), sep = ";")
+Octubre_2019 <- read.csv(file.path(ruta_base, "Impo_2019/10. Octubre_2019.csv"), sep = ";")
+Noviembre_2019 <- read.csv(file.path(ruta_base, "Impo_2019/11. Noviembre_2019.csv"), sep = ";")
+Diciembre_2019 <- read.csv(file.path(ruta_base, "Impo_2019/12. Diciembre_2019.csv"), sep = ";")
 
-#Extraccion de datos 2021
-Enero_2021  <- read.csv()
-Febrero_2021 <- read.csv()
-Marzo_2021 <- read.csv()
-Abril_2021 <- read.csv()
-Mayo_2021 <- read.csv()
-Junio_2021 <- read.csv()
-Julio_2021 <- read.csv()
-Agosto_2021 <- read.csv()
-Septiembre_2021 <- read.csv()
-Octubre_2021 <- read.csv()
-Noviembre_2021 <- read.csv()
+# Extracción de datos 2020
+Enero_2020  <- read.csv(file.path(ruta_base, "Impo_2020/1. Enero_2020.csv"), sep = ";")
+Febrero_2020 <- read.csv(file.path(ruta_base, "Impo_2020/2. Febrero_2020.csv"), sep = ";")
+Marzo_2020 <- read.csv(file.path(ruta_base, "Impo_2020/3. Marzo_2020.csv"), sep = ";")
+Abril_2020 <- read.csv(file.path(ruta_base, "Impo_2020/4. Abril_2020.csv"), sep = ";")
+Mayo_2020 <- read.csv(file.path(ruta_base, "Impo_2020/5. Mayo_2020.csv"), sep = ";")
+Junio_2020 <- read.csv(file.path(ruta_base, "Impo_2020/6. Junio_2020.csv"), sep = ";")
+Julio_2020 <- read.csv(file.path(ruta_base, "Impo_2020/7. Julio_2020.csv"), sep = ";")
+Agosto_2020 <- read.csv(file.path(ruta_base, "Impo_2020/8. Agosto_2020.csv"), sep = ";")
+Septiembre_2020 <- read.csv(file.path(ruta_base, "Impo_2020/9. Septiembre_2020.csv"), sep = ";")
+Octubre_2020 <- read.csv(file.path(ruta_base, "Impo_2020/10. Octubre_2020.csv"), sep = ";")
+Noviembre_2020 <- read.csv(file.path(ruta_base, "Impo_2020/11. Noviembre_2020.csv"), sep = ";")
+Diciembre_2020 <- read.csv(file.path(ruta_base, "Impo_2020/12. Diciembre_2020.csv"), sep = ";")
 
-#Extraccion de datos 2022
-Enero_2022  <- read.csv()
-Febrero_2022 <- read.csv()
-Marzo_2022 <- read.csv()
-Abril_2022 <- read.csv()
-Mayo_2022 <- read.csv()
-Junio_2022 <- read.csv()
-Julio_2022 <- read.csv()
-Agosto_2022 <- read.csv()
-Septiembre_2022 <- read.csv()
-Octubre_2022 <- read.csv()
-Noviembre_2022 <- read.csv()
+#Eneste punto dejamos de especificar de que año era cada mes durante la extracción de datos por simplicidad de lectura en el codigo
+
+# Extracción de datos 2021
+Enero  <- read.csv(file.path(ruta_base, "Impo_2021/1. Enero.csv"), sep = ";")
+Febrero <- read.csv(file.path(ruta_base, "Impo_2021/2. Febrero.csv"), sep = ";")
+Marzo <- read.csv(file.path(ruta_base, "Impo_2021/3. Marzo.csv"), sep = ";")
+Abril <- read.csv(file.path(ruta_base, "Impo_2021/4. Abril.csv"), sep = ";")
+Mayo <- read.csv(file.path(ruta_base, "Impo_2021/5. Mayo.csv"), sep = ";")
+Junio <- read.csv(file.path(ruta_base, "Impo_2021/6. Junio.csv"), sep = ";")
+Julio <- read.csv(file.path(ruta_base, "Impo_2021/7. Julio.csv"), sep = ";")
+Agosto <- read.csv(file.path(ruta_base, "Impo_2021/8. Agosto.csv"), sep = ";")
+Septiembre <- read.csv(file.path(ruta_base, "Impo_2021/9. Septiembre.csv"), sep = ";")
+Octubre <- read.csv(file.path(ruta_base, "Impo_2021/10. Octubre.csv"), sep = ";")
+Noviembre <- read.csv(file.path(ruta_base, "Impo_2021/11. Noviembre.csv"), sep = ";")
+Diciembre <- read.csv(file.path(ruta_base, "Impo_2021/12. Diciembre.csv"), sep = ";")
+
+# Extracción de datos 2022
+Enero  <- read.csv(file.path(ruta_base, "Impo_2022/1. Enero.csv"), sep = ";")
+Febrero <- read.csv(file.path(ruta_base, "Impo_2022/2. Febrero.csv"), sep = ";")
+Marzo <- read.csv(file.path(ruta_base, "Impo_2022/3. Marzo.csv"), sep = ";")
+Abril <- read.csv(file.path(ruta_base, "Impo_2022/4. Abril.csv"), sep = ";")
+Mayo <- read.csv(file.path(ruta_base, "Impo_2022/5. Mayo.csv"), sep = ";")
+Junio <- read.csv(file.path(ruta_base, "Impo_2022/6. Junio.csv"), sep = ";")
+Julio <- read.csv(file.path(ruta_base, "Impo_2022/7. Julio.csv"), sep = ";")
+Agosto <- read.csv(file.path(ruta_base, "Impo_2022/8. Agosto.csv"), sep = ";")
+Septiembre <- read.csv(file.path(ruta_base, "Impo_2022/9. Septiembre.csv"), sep = ";")
+Octubre <- read.csv(file.path(ruta_base, "Impo_2022/10. Octubre.csv"), sep = ";")
+Noviembre <- read.csv(file.path(ruta_base, "Impo_2022/11. Noviembre.csv"), sep = ";")
+Diciembre <- read.csv(file.path(ruta_base, "Impo_2022/12. Diciembre.csv"), sep = ";")
 
 COLUMNAS <- c("PBK", "CODLUIN","DEPTODES", "VIATRANS", "FLETE", "VACID", "VADUA")
 #Extraccion de columas exactas para 2019
