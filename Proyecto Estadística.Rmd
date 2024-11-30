@@ -99,54 +99,48 @@ Lo que más nos parecio cursioso de los archivos es que ningún dice específica
 | RZIMPO     | Razón social del importador         |
 | DEREL      | Derechos Arancelarios               |
 
-
-- **3.3.** Los pasos de importación y limpieza de datos se explican en el texto (dígame por qué realiza las actividades de limpieza de datos que realiza) y siguen un proceso lógico.
+-   **3.3.** Los pasos de importación y limpieza de datos se explican en el texto (dígame por qué realiza las actividades de limpieza de datos que realiza) y siguen un proceso lógico.
 
 Teniendo en cuenta que nos estamos concentrando en encontrar y crear gráficas de información general de 4 años distintos, debemos agradecer al DANE, de que los archivos están muy bien estandarizados, no fue necesario una limpieza tan profunda más que un carcter mayuscula o minúsucula que no iba. Nuestro proceso lógico y repetitivo se baso en tomar los .csv de cadda mes, de cada año e ir extrayendo la información necesaria y guardandola en data frames respectivos de la información.
 
 TERMINAR - - - - - - - - - - - -
 
-- **3.4.** Una vez que sus datos estén limpios, muestre cómo se ve el conjunto de datos final. Sin embargo, no imprima un marco de datos con más de 200 filas; muéstreme los datos en la forma más condensada posible.
+-   **3.4.** Una vez que sus datos estén limpios, muestre cómo se ve el conjunto de datos final. Sin embargo, no imprima un marco de datos con más de 200 filas; muéstreme los datos en la forma más condensada posible.
 
 CODIGO DE JOSE
 
-- **3.5.** Proporcione información resumida sobre las variables de interés en su conjunto de datos limpios. No se limite a imprimir un montón de fragmentos de código con str(), summary(), etc. Más bien, proporcione una explicación consolidada, ya sea con una tabla que proporcione información resumida para cada variable o un párrafo de resumen.
+-   **3.5.** Proporcione información resumida sobre las variables de interés en su conjunto de datos limpios. No se limite a imprimir un montón de fragmentos de código con str(), summary(), etc. Más bien, proporcione una explicación consolidada, ya sea con una tabla que proporcione información resumida para cada variable o un párrafo de resumen.
 
 CODIGO
 
-###Posibles gráficas básicas
-Diagramas de barras para cada uno...
-*   Frecuencias de los paises de procedencia
-*   Frecuencias de los paises de compra
-*   Frecuencias de los ciudades que más exportan hacia colombia
-*   Frecuencias de las cada ciudad que reciben
-*   Cantidad de dinero en mercancias le llegó a cada departamento
-*   Gráfica de torta para las ciudades a donde llega la mercancia, por año, cuanto porcentaje llega a bogotá, a medellin, etc...
-*   Gráfica de medios de transporte y su precio
+###Posibles gráficas básicas Diagramas de barras para cada uno... \* Frecuencias de los paises de procedencia \* Frecuencias de los paises de compra \* Frecuencias de los ciudades que más exportan hacia colombia \* Frecuencias de las cada ciudad que reciben \* Cantidad de dinero en mercancias le llegó a cada departamento \* Gráfica de torta para las ciudades a donde llega la mercancia, por año, cuanto porcentaje llega a bogotá, a medellin, etc... \* Gráfica de medios de transporte y su precio
 
+###Posibles cálculos \* Ver qué probabilidad hay de que X país de origen nos envién una mercancía a X ciudad \* Ver que probabilidad hay de que la mercancia llegue a Bogotá/Medellin/Buenaventura/cali/pererira
 
-###Posibles cálculos
-*   Ver qué probabilidad hay de que X país de origen nos envién una mercancía a X ciudad
-*   Ver que probabilidad hay de que la mercancia llegue a Bogotá/Medellin/Buenaventura/cali/pererira
-
-*   Promedio, mediana de mercancia por ciudades
-*   Calcular los aranceles de cada aduana -> saber cual fue la más cara y la más económica
-
+-   Promedio, mediana de mercancia por ciudades
+-   Calcular los aranceles de cada aduana -\> saber cual fue la más cara y la más económica
 
 ---------------------------------------------------------- INICIO DE CÓDIGO ----------------------------------------------------------
+
 ```{r}
+install.packages("dplyr")
+library(dplyr)
+
 #Extraccion de datos 2019
-Enero_2019  <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\1. Enero_2019.csv", sep=";")
-Febrero_2019 <- read.csv()
-Marzo_2019 <- read.csv()
-Abril_2019 <- read.csv()
-Mayo_2019 <- read.csv()
-Junio_2019 <- read.csv()
-Julio_2019 <- read.csv()
-Agosto_2019 <- read.csv()
-Septiembre_2019 <- read.csv()
-Octubre_2019 <- read.csv()
-Noviembre_2019 <- read.csv()
+Enero_2019  <- read.csv("C:\\Users\\joseq\\Downloads\\Importaciones_Proyecto_Estadistica\\Impo_2019\\Enero\\Enero.csv", sep=";")
+
+
+Febrero_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\2. Febrero_2019.csv", sep=";")
+Marzo_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\3. Marzo_2019.csv", sep=";")
+Abril_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\4. Abril_2019.csv", sep=";")
+Mayo_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\5. Mayo_2019.csv", sep=";")
+Junio_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\6. Junio_2019.csv", sep=";")
+Julio_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\7. Julio_2019.csv",sep=";")
+Agosto_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\8. Agosto_2019.csv",sep=";")
+Septiembre_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\9. Septiembre_2019.csv", sep=";")
+Octubre_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\10. Octubre_2019.csv", sep=";")
+Noviembre_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\11. Noviembre_2019.csv", sep=";")
+Diciembre_2019 <- read.csv("C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final\\Impo_2019\\12. Diciembre_2019.csv", sep=";")
 
 #Extraccion de datos 2020
 Enero_2020  <- read.csv()
@@ -174,7 +168,7 @@ Septiembre_2021 <- read.csv()
 Octubre_2021 <- read.csv()
 Noviembre_2021 <- read.csv()
 
- #Extraccion de datos 2022
+#Extraccion de datos 2022
 Enero_2022  <- read.csv()
 Febrero_2022 <- read.csv()
 Marzo_2022 <- read.csv()
@@ -186,7 +180,108 @@ Agosto_2022 <- read.csv()
 Septiembre_2022 <- read.csv()
 Octubre_2022 <- read.csv()
 Noviembre_2022 <- read.csv()
-```
 
+COLUMNAS <- c("PBK", "CODLUIN","DEPTODES", "VIATRANS", "FLETE", "VACID", "VADUA")
+#Extraccion de columas exactas para 2019
 
+Enero_2019 <- Enero_2019 %>% select(all_of(COLUMNAS))
 
+Febrero_2019 <- Febrero_2019 %>% select(all_of(COLUMNAS))
+
+Marzo_2019 <- Marzo_2019 %>% select(all_of(COLUMNAS))
+
+Abril_2019 <- Abril_2019 %>% select(all_of(COLUMNAS))
+
+Mayo_2019 <- Mayo_2019 %>% select(all_of(COLUMNAS))
+
+Junio_2019 <- Junio_2019 %>% select(all_of(COLUMNAS))
+
+Julio_2019 <- Julio_2019 %>% select(all_of(COLUMNAS))
+
+Agosto_2019 <- Agosto_2019 %>% select(all_of(COLUMNAS))
+
+Septiembre_2019 <- Septiembre_2019 %>% select(all_of(COLUMNAS))
+
+Octubre_2019 <- Octubre_2019 %>% select(all_of(COLUMNAS))
+
+Noviembre_2019 <- Noviembre_2019 %>% select(all_of(COLUMNAS))
+
+Diciembre_2019 <- Diciembre_2019 %>% select(all_of(COLUMNAS))
+
+#Extraccion de datos de importacion para 2020
+
+Enero_2020 <- Enero_2020 %>% select(all_of(COLUMNAS))
+
+Febrero_2020 <- Febrero_2020 %>% select(all_of(COLUMNAS))
+
+Marzo_2020 <- Marzo_2020 %>% select(all_of(COLUMNAS))
+
+Abril_2020 <- Abril_2020 %>% select(all_of(COLUMNAS))
+
+Mayo_2020 <- Mayo_2020 %>% select(all_of(COLUMNAS))
+
+Junio_2020 <- Junio_2020 %>% select(all_of(COLUMNAS))
+
+Julio_2020 <- Julio_2020 %>% select(all_of(COLUMNAS))
+
+Agosto_2020 <- Agosto_2020 %>% select(all_of(COLUMNAS))
+
+Septiembre_2020 <- Septiembre_2020 %>% select(all_of(COLUMNAS))
+
+Octubre_2020 <- Octubre_2020 %>% select(all_of(COLUMNAS))
+
+Noviembre_2020 <- Noviembre_2020 %>% select(all_of(COLUMNAS))
+
+Diciembre_2020 <- Diciembre_2020 %>% select(all_of(COLUMNAS))
+
+#Extraccion de datos para 2021
+
+Enero_2021 <- Enero_2021 %>% select(all_of(COLUMNAS))
+
+Febrero_2021 <- Febrero_2021 %>% select(all_of(COLUMNAS))
+
+Marzo_2021 <- Marzo_2021 %>% select(all_of(COLUMNAS))
+
+Abril_2021 <- Abril_2021 %>% select(all_of(COLUMNAS))
+
+Mayo_2021 <- Mayo_2021 %>% select(all_of(COLUMNAS))
+
+Junio_2021 <- Junio_2021 %>% select(all_of(COLUMNAS))
+
+Julio_2021 <- Julio_2021 %>% select(all_of(COLUMNAS))
+
+Agosto_2021 <- Agosto_2021 %>% select(all_of(COLUMNAS))
+
+Septiembre_2021 <- Septiembre_2021 %>% select(all_of(COLUMNAS))
+
+Octubre_2021 <- Octubre_2021 %>% select(all_of(COLUMNAS))
+
+Noviembre_2021 <- Noviembre_2021 %>% select(all_of(COLUMNAS))
+
+Diciembre_2021 <- Diciembre_2021 %>% select(all_of(COLUMNAS))
+
+#Extraccion de datos para 2022
+
+Enero_2022 <- Enero_2022 %>% select(all_of(COLUMNAS))
+
+Febrero_2022 <- Febrero_2022 %>% select(all_of(COLUMNAS))
+
+Marzo_2022 <- Marzo_2022 %>% select(all_of(COLUMNAS))
+
+Abril_2022 <- Abril_2022 %>% select(all_of(COLUMNAS))
+
+Mayo_2022 <- Mayo_2022 %>% select(all_of(COLUMNAS))
+
+Junio_2022 <- Junio_2022 %>% select(all_of(COLUMNAS))
+
+Julio_2022 <- Julio_2022 %>% select(all_of(COLUMNAS))
+
+Agosto_2022 <- Agosto_2022 %>% select(all_of(COLUMNAS))
+
+Septiembre_2022 <- Septiembre_2022 %>% select(all_of(COLUMNAS))
+
+Octubre_2022 <- Octubre_2022 %>% select(all_of(COLUMNAS))
+
+Noviembre_2022 <- Noviembre_2022 %>% select(all_of(COLUMNAS))
+
+Diciembre_2022 <- Diciembre_2022 %>% select(all_of(COLUMNAS))```
