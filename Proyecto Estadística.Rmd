@@ -35,8 +35,8 @@ Esperamos que nuestro análisis ayude al consumidor a ver como las mercancias se
 ## **2. Paquetes de R**
 
 ```{r}
-install.packages("dplyr")
-install.packages("ggplot2")
+#install.packages("dplyr")
+#install.packages("ggplot2")
 library("ggplot2")
 library(dplyr)
 library(scales)
@@ -112,7 +112,7 @@ TERMINAR DE ARREGLAR TEXTO
 
 ---------------------------------------------------------- INICIO DE CÓDIGO ----------------------------------------------------------
 
-
+Cargue de archivos y data:
 
 ```{r}
 # Define la ruta base de los arvhivos
@@ -178,7 +178,7 @@ Diciembre_2022 <- read.csv(file.path(ruta_base, "Impo_2022/12. Diciembre.csv"), 
 
 ```
 
-Declaramos las columnas que queremos trabajar:
+Gráficos sobre las frecuencias absolutas de importaciones en cada año:
 
 ```{r}
 COLUMNAS <- c("PBK", "CODLUIN","DEPTODES", "VIATRANS", "FLETE", "VACID", "VADUA", "VIATRANS") 
@@ -223,13 +223,12 @@ datos_2019$Mes <- factor(datos_2019$Mes, levels = c("Enero", "Febrero", "Marzo",
 # Crear el gráfico de barras
 ggplot(data = datos_2019, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   geom_col(fill = "#310541", color = "black", alpha = 0.7, position = position_dodge(width = 0.9)) +
-  labs(title = "Importaciones mensuales de 2019", x = "Mes", y = "Frecuencia") +
+  labs(title = "Frecuencia de Importaciones mensuales de 2019", x = "Mes", y = "Frecuencia") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma)
 
 ```
-
 
 ```{r}
 Enero_2020 <- Enero_2020 %>% select(all_of(COLUMNAS))
@@ -271,7 +270,7 @@ datos_2020$Mes <- factor(datos_2020$Mes, levels = c("Enero", "Febrero", "Marzo",
 # Crear el gráfico de barras
 ggplot(data = datos_2020, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   geom_col(fill = "#c551ef", color = "black", alpha = 0.7, position = position_dodge(width = 0.9)) +
-  labs(title = "Importaciones mensuales de 2020", x = "Mes", y = "Frecuencia") +
+  labs(title = "Frecuencia de Importaciones mensuales de 2020", x = "Mes", y = "Frecuencia") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma)
@@ -319,7 +318,7 @@ datos_2021$Mes <- factor(datos_2021$Mes, levels = c("Enero", "Febrero", "Marzo",
 # Crear el gráfico de barras
 ggplot(data = datos_2021, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   geom_col(fill = "#41018d", color = "black", alpha = 0.7, position = position_dodge(width = 0.9)) +
-  labs(title = "Importaciones mensuales de 2021", x = "Mes", y = "Frecuencia") +
+  labs(title = "Frecuencia de Importaciones mensuales de 2021", x = "Mes", y = "Frecuencia") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma) 
@@ -365,7 +364,30 @@ datos_2022$Mes <- factor(datos_2022$Mes, levels = c("Enero", "Febrero", "Marzo",
 # Crear el gráfico de barras
 ggplot(data = datos_2022, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   geom_col(fill = "#bf8bfd", color = "black", alpha = 0.7, position = position_dodge(width = 0.9)) +
-  labs(title = "Importaciones mensuales de 2022", x = "Mes", y = "Frecuencia") +
+  labs(title = "Frecuencia de Importaciones mensuales de 2022", x = "Mes", y = "Frecuencia") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  scale_y_continuous(labels = comma)
+
+```
+
+```{r}
+# Calcular los promedio de Mercancía para cada año
+
+# Crear un dataframe consolidado
+promedios_anuales <- data.frame(
+  Año = c(2019, 2020, 2021, 2022),
+  Promedio = c(mean(datos_2019$FrecuenciaAbsoluta), 
+               mean(datos_2020$FrecuenciaAbsoluta), 
+               mean(datos_2021$FrecuenciaAbsoluta), 
+               mean(datos_2022$FrecuenciaAbsoluta))
+)
+
+#Se crea la gráfica
+ggplot(data = promedios_anuales, aes(x = factor(Año), y = Promedio)) +
+  geom_col(fill = "#2e2050", color = "black", alpha = 0.8) +
+  geom_text(aes(label = comma(Promedio)), vjust= - 0.5, size = 4) +
+  labs(title = "Promedio de Frecuencias de Importaciones por Año", x = "Año", y = "Promedio de Frecuencias") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma)
@@ -373,8 +395,105 @@ ggplot(data = datos_2022, aes(x = Mes, y = FrecuenciaAbsoluta)) +
 ```
 
 
+Limpieza de datos: PBK, FLETES, VACID, VADUA
+
+```{r}
+# Listas de tablas y columnas para cada año
+nombre_tablas_2019 <- c("Enero_2019", "Febrero_2019", "Marzo_2019", "Abril_2019", "Mayo_2019",
+                        "Junio_2019", "Julio_2019", "Agosto_2019", "Septiembre_2019", "Octubre_2019", 
+                        "Noviembre_2019", "Diciembre_2019")
+                        
+nombre_tablas_2020 <- c("Enero_2020", "Febrero_2020", "Marzo_2020", "Abril_2020", "Mayo_2020", 
+                        "Junio_2020", "Julio_2020", "Agosto_2020", "Septiembre_2020", "Octubre_2020", 
+                        "Noviembre_2020", "Diciembre_2020")
+nombre_tablas_2021 <- c("Enero_2021", "Febrero_2021", "Marzo_2021", "Abril_2021", "Mayo_2021", 
+                        "Junio_2021", "Julio_2021", "Agosto_2021", "Septiembre_2021", "Octubre_2021", 
+                        "Noviembre_2021", "Diciembre_2021")
+nombre_tablas_2022 <- c("Enero_2022", "Febrero_2022", "Marzo_2022", "Abril_2022", "Mayo_2022", 
+                        "Junio_2022", "Julio_2022", "Agosto_2022", "Septiembre_2022", "Octubre_2022", 
+                        "Noviembre_2022", "Diciembre_2022")
+
+nombre_columnas <- c("PBK", "FLETE", "VACID", "VADUA")
 
 
+#LIMPIEZA DE DATOS
+
+# ANGELA: Función para convertir las columnas de cada tabla
+convertir_columnas <- function(nombre_tablas, nombre_columnas) {
+  for(tabla in nombre_tablas) {
+    temp_tabla <- get(tabla)
+    for(columna in nombre_columnas) {
+      # Primero, eliminar cualquier espacio en blanco
+      temp_tabla[[columna]] <- trimws(temp_tabla[[columna]])
+      
+      # Reemplazar comas por puntos
+      temp_tabla[[columna]] <- gsub(",", ".", temp_tabla[[columna]])
+      
+      # Eliminar cualquier carácter no numérico excepto el punto decimal
+      temp_tabla[[columna]] <- gsub("[^0-9.]", "", temp_tabla[[columna]])
+      
+      # Convertir a numérico, con manejo de NA
+      temp_tabla[[columna]] <- as.numeric(temp_tabla[[columna]])
+    }
+    assign(tabla, temp_tabla, envir = .GlobalEnv)
+  }
+}
+
+```
+
+Operaciones para las importaciones totales por año:
+
+```{r}
+#Gráfico general de 4 años Promedio PBK ---------------------------------------
+
+# Función para calcular el total de importaciones por año
+calcular_importacion_total <- function(nombre_tablas) {
+  impo_total <- 0
+  for(tabla in nombre_tablas) {
+    temp_tabla <- get(tabla)
+    impo_total <- impo_total + sum(temp_tabla$PBK * temp_tabla$VACID, na.rm = TRUE)
+  }
+  return(impo_total)
+}
+
+
+# Calcular las importaciones totales para cada año
+impo_total_2019 <- calcular_importacion_total(nombre_tablas_2019)
+impo_total_2020 <- calcular_importacion_total(nombre_tablas_2020)
+impo_total_2021 <- calcular_importacion_total(nombre_tablas_2021)
+impo_total_2022 <- calcular_importacion_total(nombre_tablas_2022)
+
+# Imprimir resultados
+print("Importación total 2019:", impo_total_2019, "\n")
+print("Importación total 2020:", impo_total_2020, "\n")
+print("Importación total 2021:", impo_total_2021, "\n")
+print("Importación total 2022:", impo_total_2022, "\n")
+
+```
+
+```{r}
+# Calcular promedios PBK mensuales para 2019 ---------------------------------------
+# Crear un data frame con dos columnas: Mes y Promedio
+promedios_2019 <- data.frame(
+  Mes = nombre_tablas_2019,
+  Promedio = sapply(nombre_tablas_2019, function(tabla) {
+    # na.rm = TRUE ignora valores NA (no disponibles) en el cálculo
+    mean(get(tabla)$PBK, na.rm = TRUE)
+  })
+)
+
+# Crear gráfico de barras usando ggplot2
+ggplot(promedios_2019, aes(x = Mes, y = Promedio)) +
+  geom_col(fill = "#310541", color = "black", alpha = 0.7, position = position_dodge(width = 0.9)) +
+  #geom_text(aes(label = comma(Promedio)), vjust= - 0.5, size = 4) +
+  theme_minimal() +
+  labs(title = "Promedio Precio Mercancía 2019", x = "Mes", y = "Promedio Precio Mercancía") +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(hjust = 0.5)
+  )
+
+print(promedios_2019)
+```
 
 
 
