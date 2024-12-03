@@ -48,54 +48,50 @@ COLOCAR LAS DEMÁS--------------------------------------------------------------
 
 -   **3.1.** Obtecnión original de los datos
 
-La base de datos utilizada durante el estudio fue obtenida a través de los recursos virtuales del DANE, la cual proporciona datos publicos en su servicio de  *(ANDA)*, donde nos enontramos con un catálogo de nichos de los cuales se proporcionaban archivos .CSV con datos de interés; entre las categorías nos inclinamos por la colección de economia-microdatos, por el nicho de economía internacional, donde entre la lista de opciones de censos nos cautivo las *Estadísticas de Importaciones - IMPO - 2012 A 2024* (<https://microdatos.dane.gov.co/index.php/catalog/473/get-microdata>).
+La base de datos utilizada durante el estudio fue obtenida a través de los recursos virtuales del DANE, la cual proporciona datos publicos en su servicio de *(ANDA)*, donde nos enontramos con un catálogo de nichos de los cuales se proporcionaban archivos .CSV con datos de interés; entre las categorías nos inclinamos por la colección de economia-microdatos, por el nicho de economía internacional, donde entre la lista de opciones de censos nos cautivo las *Estadísticas de Importaciones - IMPO - 2012 A 2024* (<https://microdatos.dane.gov.co/index.php/catalog/473/get-microdata>).
 
 -   **3.2.** Explicación de datos originales
 
-Los datos fueron recolectados por el (DANE) para garantizar la veracidad y transparencia de la información básica y estratégica para la investigación y los usuarios relacionados con las compras al exterior. Los microdatos registran las importaciones de mercancías legales desde otros países o desde una región portuaria de Colombia al resto del territorio aduanero nacional. Los datos se basan en las en la fecha de presentación. 
+Los datos fueron recolectados por el (DANE) para garantizar la veracidad y transparencia de la información básica y estratégica para la investigación y los usuarios relacionados con las compras al exterior. Los microdatos registran las importaciones de mercancías legales desde otros países o desde una región portuaria de Colombia al resto del territorio aduanero nacional. Los datos se basan en las en la fecha de presentación.
 
 Los datos se almacenan en una base de datos proporcionada por ANDA, que cuenta con 44 variables, 20 discretas y 24 continuas. Los datos carecen de clasificación *específica* de las mercancías, lo más cercano es la empresa que recibe la mercancia, para la cantidad de variables se proprciona un dicconario de dato donde los nombres de las variables son acrónimos de su significado sencillos de interpretar.
 
 Algo que también nos parecio curioso es que hay dos variables llamadas Pais de Procedencia (PAISPRO) y Pais de Compra (PAISCOM), que a veces son iguales pero en la mayoría de casos es diferente lo que hace pensar que muchas mercancías son hechas en un país (PAISPRO) y son vendidas desde otros pais (PAISCOM), nos parecio curioso.
 
-| Variable   | Descripción                         | Variable   | Descripción                         |
-|------------|-------------------------------------|------------|-------------------------------------|
-| FECH       | Fecha de proceso                    | CUIDAIMP   | Ciudad del importador               |
-| ADUA       | Código de la aduana                 | CUIDAEXP   | Ciudad del exportador               |
-| PAISGEN    | País origen                         | ACTECON    | Actividad económica                 |
-| PAISPRO    | País de procedencia                 | CODADAD    | Código administración de aduana     |
-| PAISCOM    | País de compra                      | VADUA      | Valor aduana                        |
-| DEPTODES   | Departamento destino                | VRAJUS     | Valor ajuste                        |
-| VIATRANS   | Código vía de transporte            | BASEIVA    | Base IVA                            |
-| BANDERA    | Bandera                             | OTROSP     | Porcentaje otros                    |
-| REGIMEN    | Código de régimen                   | OTROSBASE  | Base otros                          |
-| ACUERDO    | Código del acuerdo                  | TOTALIVAYO | Total IVA y otros gastos            |
-| PBK        | Peso bruto en kilos                 | SEGUROS    | Seguros                             |
-| PNK        | Peso neto en kilos                  | OTROSG     | Otros gastos                        |
-| CANU       | Cantidad de unidades                | LUIN       | Lugar de ingreso                    |
-| CODA       | Código de unidad                    | CODLUIN    | Código lugar de ingreso             |
-| NABAN      | Posición arancelaria                | DEPIM      | Departamento del importador         |
-| VAFODO     | Valor FOB dólares de la mercancía   | COPAEX     | Código país del exportador          |
-| FLETE      | Fletes                              | TIPOIM     | Tipo de importación                 |
-| VACID      | Valor CIF dólares de la mercancía   | PORARA     | Porcentaje de arancel               |
-| VACIP      | Valor CIF pesos de la mercancía     | NIT        | Número de identificación Tributaria |
-| IMP1       | Impuesto a las ventas               | DIGV       | Dígito de Verificación              |
-| OTDER      | Otros Derechos                      | RZIMPO     | Razón social del importador         |
-| CLASE      | Clase de importador                 | DEREL      | Derechos Arancelarios               |
-
-
+| Variable | Descripción | Variable | Descripción |
+|----------------|--------------------|----------------|--------------------|
+| FECH | Fecha de proceso | CUIDAIMP | Ciudad del importador |
+| ADUA | Código de la aduana | CUIDAEXP | Ciudad del exportador |
+| PAISGEN | País origen | ACTECON | Actividad económica |
+| PAISPRO | País de procedencia | CODADAD | Código administración de aduana |
+| PAISCOM | País de compra | VADUA | Valor aduana |
+| DEPTODES | Departamento destino | VRAJUS | Valor ajuste |
+| VIATRANS | Código vía de transporte | BASEIVA | Base IVA |
+| BANDERA | Bandera | OTROSP | Porcentaje otros |
+| REGIMEN | Código de régimen | OTROSBASE | Base otros |
+| ACUERDO | Código del acuerdo | TOTALIVAYO | Total IVA y otros gastos |
+| PBK | Peso bruto en kilos | SEGUROS | Seguros |
+| PNK | Peso neto en kilos | OTROSG | Otros gastos |
+| CANU | Cantidad de unidades | LUIN | Lugar de ingreso |
+| CODA | Código de unidad | CODLUIN | Código lugar de ingreso |
+| NABAN | Posición arancelaria | DEPIM | Departamento del importador |
+| VAFODO | Valor FOB dólares de la mercancía | COPAEX | Código país del exportador |
+| FLETE | Fletes | TIPOIM | Tipo de importación |
+| VACID | Valor CIF dólares de la mercancía | PORARA | Porcentaje de arancel |
+| VACIP | Valor CIF pesos de la mercancía | NIT | Número de identificación Tributaria |
+| IMP1 | Impuesto a las ventas | DIGV | Dígito de Verificación |
+| OTDER | Otros Derechos | RZIMPO | Razón social del importador |
+| CLASE | Clase de importador | DEREL | Derechos Arancelarios |
 
 -   **3.3.** Los pasos de importación y limpieza de datos se explican en el texto (dígame por qué realiza las actividades de limpieza de datos que realiza) y siguen un proceso lógico.
 
-Los archivos están muy bien estandarizados, el primer paso de la limpieza fue ir descargando los .zip de cada mes de cada año para extraer el .csv de su año correspondiente, seguimos importando y extrayendo los datos necesarios a través de RMarkdown, donde devimos hacer lectura de .csv aclarando que el primero año esta separado por "," y los demás años por ";".  Además que principalmente en la columna de mercancias y algunos datos aparentemente tipo numérico venian con tipo "character" lo que nos obligo a hacer una limpieza de este item: 
+Los archivos están muy bien estandarizados, el primer paso de la limpieza fue ir descargando los .zip de cada mes de cada año para extraer el .csv de su año correspondiente, seguimos importando y extrayendo los datos necesarios a través de RMarkdown, donde devimos hacer lectura de .csv aclarando que el primero año esta separado por "," y los demás años por ";". Además que principalmente en la columna de mercancias y algunos datos aparentemente tipo numérico venian con tipo "character" lo que nos obligo a hacer una limpieza de este item:
 
 ACA SE COLOCA LA SECCION DE R DONDE ESTA LA EXTRACCIÓN Y LIMPIEZA DE DATOS.
 
 TERMINAR - - - - - - - - - - - -
 
 -   **3.4.** Una vez que sus datos estén limpios, muestre cómo se ve el conjunto de datos final. Sin embargo, no imprima un marco de datos con más de 200 filas; muéstreme los datos en la forma más condensada posible.
-
-
 
 -   **3.5.** Proporcione información resumida sobre las variables de interés en su conjunto de datos limpios. No se limite a imprimir un montón de fragmentos de código con str(), summary(), etc. Más bien, proporcione una explicación consolidada, ya sea con una tabla que proporcione información resumida para cada variable o un párrafo de resumen.
 
@@ -394,11 +390,11 @@ ggplot(data = promedios_anuales, aes(x = factor(Año), y = Promedio)) +
 
 ```
 
-
-Limpieza de datos: PBK, FLETES, VACID, VADUA
+Limpieza de datos: PBK, FLETES, VACID, VADUA, "VAFODO"
 
 ```{r}
 # Listas de tablas y columnas para cada año
+#Donde se conecta con los .CSV??
 nombre_tablas_2019 <- c("Enero_2019", "Febrero_2019", "Marzo_2019", "Abril_2019", "Mayo_2019",
                         "Junio_2019", "Julio_2019", "Agosto_2019", "Septiembre_2019", "Octubre_2019", 
                         "Noviembre_2019", "Diciembre_2019")
@@ -444,8 +440,6 @@ convertir_columnas <- function(nombre_tablas, nombre_columnas) {
 Operaciones para las importaciones totales por año:
 
 ```{r}
-#Gráfico general de 4 años Promedio PBK ---------------------------------------
-
 # Función para calcular el total de importaciones por año
 calcular_importacion_total <- function(nombre_tablas) {
   impo_total <- 0
@@ -456,44 +450,99 @@ calcular_importacion_total <- function(nombre_tablas) {
   return(impo_total)
 }
 
-
 # Calcular las importaciones totales para cada año
 impo_total_2019 <- calcular_importacion_total(nombre_tablas_2019)
 impo_total_2020 <- calcular_importacion_total(nombre_tablas_2020)
 impo_total_2021 <- calcular_importacion_total(nombre_tablas_2021)
 impo_total_2022 <- calcular_importacion_total(nombre_tablas_2022)
 
-# Imprimir resultados
-print("Importación total 2019:", impo_total_2019, "\n")
-print("Importación total 2020:", impo_total_2020, "\n")
-print("Importación total 2021:", impo_total_2021, "\n")
-print("Importación total 2022:", impo_total_2022, "\n")
+# Crear un data frame con las importaciones totales por año
+importaciones_totales <- data.frame(
+  Año = c(2019, 2020, 2021, 2022),
+  Importación_Total = c(impo_total_2019, impo_total_2020, impo_total_2021, impo_total_2022)
+)
+
+# Crear gráfico de barras con ggplot2
+ggplot(importaciones_totales, aes(x = factor(Año), y = Importación_Total)) +
+  geom_col(fill = "#2e2050", color = "black", alpha = 0.8) +
+  theme_minimal() +
+  labs(title = "Precio de Importación en Dolares por Año", x = "Año", y = "Importación Total") +
+  theme(
+    plot.title = element_text(hjust = 0.5)  # Centrar el título
+  )
+
 
 ```
 
 ```{r}
-# Calcular promedios PBK mensuales para 2019 ---------------------------------------
-# Crear un data frame con dos columnas: Mes y Promedio
-promedios_2019 <- data.frame(
-  Mes = nombre_tablas_2019,
-  Promedio = sapply(nombre_tablas_2019, function(tabla) {
-    # na.rm = TRUE ignora valores NA (no disponibles) en el cálculo
-    mean(get(tabla)$PBK, na.rm = TRUE)
-  })
+# Función para calcular el total de importaciones por año
+calcular_flete_total <- function(nombre_tablas) {
+  flete_total <- 0
+  for(tabla in nombre_tablas) {
+    temp_tabla <- get(tabla)
+    flete_total <- flete_total + sum(temp_tabla$FLETE, na.rm = TRUE)
+  }
+  return(flete_total)
+}
+
+
+# Calcular las importaciones totales para cada año
+flete_total_2019 <- calcular_flete_total(nombre_tablas_2019)
+flete_total_2020 <- calcular_flete_total(nombre_tablas_2020)
+flete_total_2021 <- calcular_flete_total(nombre_tablas_2021)
+flete_total_2022 <- calcular_flete_total(nombre_tablas_2022)
+
+# Crear un data frame con las importaciones totales por año
+fletes_totales <- data.frame(
+  Año = c(2019, 2020, 2021, 2022),
+  Flete_Total = c(flete_total_2019, flete_total_2020, flete_total_2021, flete_total_2022)
 )
 
-# Crear gráfico de barras usando ggplot2
-ggplot(promedios_2019, aes(x = Mes, y = Promedio)) +
-  geom_col(fill = "#310541", color = "black", alpha = 0.7, position = position_dodge(width = 0.9)) +
-  #geom_text(aes(label = comma(Promedio)), vjust= - 0.5, size = 4) +
+# Crear gráfico de barras con ggplot2
+ggplot(fletes_totales, aes(x = factor(Año), y = Flete_Total)) +
+  geom_col(fill = "#2e2050", color = "black", alpha = 0.8) +
+  geom_text(aes(label = scales::comma(Flete_Total)), 
+            vjust = -0.5, size = 4) +  # Agregar etiquetas encima de las barras
   theme_minimal() +
-  labs(title = "Promedio Precio Mercancía 2019", x = "Mes", y = "Promedio Precio Mercancía") +
+  labs(title = "Precio de Flete en Dólares por Año", x = "Año", y = "Precio Total de Flete") +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(hjust = 0.5)
+    plot.title = element_text(hjust = 0.5)  # Centrar el título
   )
 
-print(promedios_2019)
 ```
 
+```{r}
+# Función para calcular el total de importaciones por año
+transp_total <- function(nombre_tablas) {
+  flete_total <- 0
+  for(tabla in nombre_tablas) {
+    temp_tabla <- get(tabla)
+    flete_total <- flete_total + sum(temp_tabla$VIATRANS, na.rm = TRUE)
+  }
+  return(flete_total)
+}
 
 
+# Calcular las importaciones totales para cada año
+transp_total_2019 <- transp_total(nombre_tablas_2019)
+transp_total_2020 <- transp_total(nombre_tablas_2020)
+transp_total_2021 <- transp_total(nombre_tablas_2021)
+transp_total_2022 <- transp_total(nombre_tablas_2022)
+
+# Crear un data frame con las importaciones totales por año
+transportes_totales <- data.frame(
+  Año = c(2019, 2020, 2021, 2022),
+  Transp_Total = c(transp_total_2019, transp_total_2020, transp_total_2021, transp_total_2022)
+)
+
+# Crear gráfico de barras con ggplot2
+ggplot(transportes_totales, aes(x = factor(Año), y = Transp_Total)) +
+  geom_col(fill = "#2e2050", color = "black", alpha = 0.8) +
+  geom_text(aes(label = scales::comma(Transp_Total)), 
+            vjust = -0.5, size = 4) +  # Agregar etiquetas encima de las barras
+  theme_minimal() +
+  labs(title = "Frecuencia Absoluta de transporte por Año", x = "Año", y = "Frecuencia de Transportes") +
+  theme(
+    plot.title = element_text(hjust = 0.5)  # Centrar el título
+  )
+```
