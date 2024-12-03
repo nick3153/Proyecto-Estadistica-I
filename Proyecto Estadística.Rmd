@@ -512,37 +512,63 @@ ggplot(fletes_totales, aes(x = factor(Año), y = Flete_Total)) +
 ```
 
 ```{r}
-# Función para calcular el total de importaciones por año
-transp_total <- function(nombre_tablas) {
-  flete_total <- 0
-  for(tabla in nombre_tablas) {
-    temp_tabla <- get(tabla)
-    flete_total <- flete_total + sum(temp_tabla$VIATRANS, na.rm = TRUE)
+# Cargar librerías necesarias
+library(ggplot2)
+library(dplyr)
+
+años <- list(nombre_tablas_2019, nombre_tablas_2020, nombre_tablas_2021, nombre_tablas_2022)
+
+for (año_tablas in años) {
+  
+  # Lista vacía para almacenar las frecuencias de transportes por mes
+  frecuencias_transportes <- list()
+  
+  # Bucle para procesar cada mes dentro del año
+  for (mes in año_tablas) {
+    
+    # Obtener los datos de transporte del mes
+    datos_mes <- get(mes)$VIATRANS
+    
+    # Calcular la tabla de frecuencias por tipo de transporte
+    frecuencias <- table(datos_mes)
+    
+    # Convertir a data frame y agregar la columna 'Mes'
+    df_frecuencias <- as.data.frame(frecuencias)
+    colnames(df_frecuencias) <- c("Tipo_Transporte", "Cantidad")
+    
+    # Extraer el mes y el año del nombre de la tabla y agregarlo como columna
+    df_frecuencias$Mes <- gsub("_\\d{4}", "", mes)  # Eliminar el sufijo del año
+    
+    # Agregar la tabla del mes al listado
+    frecuencias_transportes[[mes]] <- df_frecuencias
   }
-  return(flete_total)
+  
+  # Combinar todas las tablas en un solo data frame
+  transportes_totales <- do.call(rbind, frecuencias_transportes)
+  
+  # Sumar las cantidades por mes y tipo de transporte
+  transportes_totales <- transportes_totales %>%
+    group_by(Mes, Tipo_Transporte) %>%
+    summarise(Cantidad = sum(Cantidad, na.rm = TRUE)) %>%
+    ungroup()
+  
+  # Graficar con ggplot2
+  ggplot(transportes_totales, aes(x = Mes, y = Cantidad, fill = factor(Tipo_Transporte))) +
+    geom_bar(stat = "identity", position = "stack", color = "black") +
+    scale_fill_brewer(palette = "Set3") +  # Cambiar la paleta de colores para mejor visualización
+    theme_minimal() +
+    labs(
+      title = paste("Cantidad Total de Transportes por Mes -", gsub("_.*", "", año_tablas[1])),
+      x = "Mes",
+      y = "Cantidad Total de Transportes",
+      fill = "Tipo de Transporte"
+    ) +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),  # Rotar las etiquetas de los meses para legibilidad
+      plot.title = element_text(hjust = 0.5)  # Centrar el título
+    )
+  
+  # Mostrar los datos totales por mes y tipo de transporte
+  print(transportes_totales)
 }
-
-
-# Calcular las importaciones totales para cada año
-transp_total_2019 <- transp_total(nombre_tablas_2019)
-transp_total_2020 <- transp_total(nombre_tablas_2020)
-transp_total_2021 <- transp_total(nombre_tablas_2021)
-transp_total_2022 <- transp_total(nombre_tablas_2022)
-
-# Crear un data frame con las importaciones totales por año
-transportes_totales <- data.frame(
-  Año = c(2019, 2020, 2021, 2022),
-  Transp_Total = c(transp_total_2019, transp_total_2020, transp_total_2021, transp_total_2022)
-)
-
-# Crear gráfico de barras con ggplot2
-ggplot(transportes_totales, aes(x = factor(Año), y = Transp_Total)) +
-  geom_col(fill = "#2e2050", color = "black", alpha = 0.8) +
-  geom_text(aes(label = scales::comma(Transp_Total)), 
-            vjust = -0.5, size = 4) +  # Agregar etiquetas encima de las barras
-  theme_minimal() +
-  labs(title = "Frecuencia Absoluta de transporte por Año", x = "Año", y = "Frecuencia de Transportes") +
-  theme(
-    plot.title = element_text(hjust = 0.5)  # Centrar el título
-  )
 ```
