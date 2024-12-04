@@ -395,26 +395,26 @@ Limpieza de datos: PBK, FLETES, VACID, VADUA, "VAFODO"
 ```{r}
 # Listas de tablas y columnas para cada año
 # Listas de tablas y columnas para cada año
-nombre_tablas_2019 <- c("Enero_2019", "Febrero_2019", "Marzo_2019", "Abril_2019", "Mayo_2019",
+tablas_2019 <- c("Enero_2019", "Febrero_2019", "Marzo_2019", "Abril_2019", "Mayo_2019",
                         "Junio_2019", "Julio_2019", "Agosto_2019", "Septiembre_2019", "Octubre_2019", 
                         "Noviembre_2019", "Diciembre_2019")
                         
-nombre_tablas_2020 <- c("Enero_2020", "Febrero_2020", "Marzo_2020", "Abril_2020", "Mayo_2020", 
+tablas_2020 <- c("Enero_2020", "Febrero_2020", "Marzo_2020", "Abril_2020", "Mayo_2020", 
                         "Junio_2020", "Julio_2020", "Agosto_2020", "Septiembre_2020", "Octubre_2020", 
                         "Noviembre_2020", "Diciembre_2020")
-nombre_tablas_2021 <- c("Enero_2021", "Febrero_2021", "Marzo_2021", "Abril_2021", "Mayo_2021", 
+tablas_2021 <- c("Enero_2021", "Febrero_2021", "Marzo_2021", "Abril_2021", "Mayo_2021", 
                         "Junio_2021", "Julio_2021", "Agosto_2021", "Septiembre_2021", "Octubre_2021", 
                         "Noviembre_2021", "Diciembre_2021")
-nombre_tablas_2022 <- c("Enero_2022", "Febrero_2022", "Marzo_2022", "Abril_2022", "Mayo_2022", 
+tablas_2022 <- c("Enero_2022", "Febrero_2022", "Marzo_2022", "Abril_2022", "Mayo_2022", 
                         "Junio_2022", "Julio_2022", "Agosto_2022", "Septiembre_2022", "Octubre_2022", 
                         "Noviembre_2022", "Diciembre_2022")
-nombre_columnas <- c("PBK", "FLETE", "VACID", "VADUA")
+info_columnas <- c("PBK", "FLETE", "VACID", "VADUA")
 
 # Función mejorada para convertir las columnas de cada tabla
-convertir_columnas <- function(nombre_tablas, nombre_columnas) {
+convertir_columnas <- function(nombre_tablas, info_columnas) {
   for(tabla in nombre_tablas) {
     temp_tabla <- get(tabla)
-    for(columna in nombre_columnas) {
+    for(columna in info_columnas) {
       # Primero, eliminar cualquier espacio en blanco
       temp_tabla[[columna]] <- trimws(temp_tabla[[columna]])
       
@@ -432,10 +432,10 @@ convertir_columnas <- function(nombre_tablas, nombre_columnas) {
 }
 
 # Convertir las columnas de cada año
-convertir_columnas(nombre_tablas_2019, nombre_columnas)
-convertir_columnas(nombre_tablas_2020, nombre_columnas)
-convertir_columnas(nombre_tablas_2021, nombre_columnas)
-convertir_columnas(nombre_tablas_2022, nombre_columnas)
+convertir_columnas(tablas_2019, info_columnas)
+convertir_columnas(tablas_2020, info_columnas)
+convertir_columnas(tablas_2021, info_columnas)
+convertir_columnas(tablas_2022, info_columnas)
 ```
 
 
@@ -451,10 +451,10 @@ calcular_importacion_total <- function(nombre_tablas) {
 }
 
 # Calcular las importaciones totales para cada año
-impo_total_2019 <- calcular_importacion_total(nombre_tablas_2019)
-impo_total_2020 <- calcular_importacion_total(nombre_tablas_2020)
-impo_total_2021 <- calcular_importacion_total(nombre_tablas_2021)
-impo_total_2022 <- calcular_importacion_total(nombre_tablas_2022)
+impo_total_2019 <- calcular_importacion_total(tablas_2019)
+impo_total_2020 <- calcular_importacion_total(tablas_2020)
+impo_total_2021 <- calcular_importacion_total(tablas_2021)
+impo_total_2022 <- calcular_importacion_total(tablas_2022)
 
 # Crear un data frame con las importaciones totales por año
 importaciones_totales <- data.frame(
@@ -487,10 +487,10 @@ calcular_flete_total <- function(nombre_tablas) {
 
 
 # Calcular las importaciones totales para cada año
-flete_total_2019 <- calcular_flete_total(nombre_tablas_2019)
-flete_total_2020 <- calcular_flete_total(nombre_tablas_2020)
-flete_total_2021 <- calcular_flete_total(nombre_tablas_2021)
-flete_total_2022 <- calcular_flete_total(nombre_tablas_2022)
+flete_total_2019 <- calcular_flete_total(tablas_2019)
+flete_total_2020 <- calcular_flete_total(tablas_2020)
+flete_total_2021 <- calcular_flete_total(tablas_2021)
+flete_total_2022 <- calcular_flete_total(tablas_2022)
 
 # Crear un data frame con las importaciones totales por año
 fletes_totales <- data.frame(
@@ -515,7 +515,7 @@ ggplot(fletes_totales, aes(x = factor(Año), y = Flete_Total)) +
 library(ggplot2)
 library(dplyr)
 
-años <- list(nombre_tablas_2019, nombre_tablas_2020, nombre_tablas_2021, nombre_tablas_2022)
+años <- list(tablas_2019, tablas_2020, tablas_2021, tablas_2022)
 
 for (año_tablas in años) {
   
