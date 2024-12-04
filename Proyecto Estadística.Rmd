@@ -44,7 +44,6 @@ library(lsr)
 library(moments)
 ```
 
-
 ## **3. Preparación de los datos**
 
 -   **3.1.** Obtecnión original de los datos
@@ -60,7 +59,7 @@ Los datos se almacenan en una base de datos proporcionada por ANDA, que cuenta c
 Algo que también nos parecio curioso es que hay dos variables llamadas Pais de Procedencia (PAISPRO) y Pais de Compra (PAISCOM), que a veces son iguales pero en la mayoría de casos es diferente lo que hace pensar que muchas mercancías son hechas en un país (PAISPRO) y son vendidas desde otros pais (PAISCOM), nos parecio curioso.
 
 | Variable | Descripción | Variable | Descripción |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | FECH | Fecha de proceso | CUIDAIMP | Ciudad del importador |
 | ADUA | Código de la aduana | CUIDAEXP | Ciudad del exportador |
 | PAISGEN | País origen | ACTECON | Actividad económica |
@@ -88,7 +87,7 @@ Algo que también nos parecio curioso es que hay dos variables llamadas Pais de 
 
 Los archivos están muy bien estandarizados, el primer paso de la limpieza fue ir descargando los .zip de cada mes de cada año para extraer el .csv de su año correspondiente, seguimos importando y extrayendo los datos necesarios a través de RMarkdown, donde devimos hacer lectura de .csv aclarando que el primero año esta separado por "," y los demás años por ";". Además que principalmente en la columna de mercancias y algunos datos aparentemente tipo numérico venian con tipo "character" lo que nos obligo a hacer una limpieza de este item:
 
-Cargue de archivos y data:No correr:
+Cargue de archivos y <data:No> correr:
 
 ```{r}
 # Define la ruta base de los arvhivos
@@ -155,6 +154,7 @@ Diciembre_2022 <- read.csv(file.path(ruta_base, "Impo_2022/12. Diciembre.csv"), 
 ```
 
 Extracción de columnas
+
 ```{r}
 COLUMNAS <- c("PBK", "CODLUIN","DEPTODES", "VIATRANS", "FLETE", "VACID", "VADUA", "VIATRANS") 
 
@@ -212,7 +212,6 @@ Noviembre_2022 <- Noviembre_2022 %>% select(all_of(COLUMNAS))
 Diciembre_2022 <- Diciembre_2022 %>% select(all_of(COLUMNAS))
 ```
 
-
 Limpieza de datos: PBK, FLETES, VACID, VADUA, "VAFODO"
 
 ```{r}
@@ -261,10 +260,7 @@ convertir_columnas(tablas_2022, info_columnas)
 
 ```
 
-
-
--   **3.4.** Conjunto de datos final:
-Realizada la limpieza de datos, debemos mencionar que esta fue realizada a cad uno de los 48 meses con los que trabajamos, por lo tanto, mostramos una visra general de uno de los mese (que se repite en los demás meses)
+-   **3.4.** Conjunto de datos final: Realizada la limpieza de datos, debemos mencionar que esta fue realizada a cad uno de los 48 meses con los que trabajamos, por lo tanto, mostramos una visra general de uno de los mese (que se repite en los demás meses)
 
 ```{r}
 print(head(Enero_2021,10))
@@ -286,7 +282,7 @@ valores_VADUA <- function(tablas_año, año){
   
   # Crear data frame manteniendo la estructura correcta
   df_resumen <- data.frame(
-    Año = año,
+    VADUA_Año = año,
     Min = as.numeric(resumen_total["Min."]),
     Mean = as.numeric(resumen_total["Mean"]),
     Max = as.numeric(resumen_total["Max."])
@@ -305,45 +301,44 @@ VADUA_2022 <- valores_VADUA(tablas_2022, "2022")
 print(resumen_final <- rbind(VADUA_2019, VADUA_2020, VADUA_2021, VADUA_2022))
 ```
 
+En la obtención de los datos podemos ver que promedio de los datos de 2019 y 2020 no hubo tanta variación, en promedio, sin embargo, podemos obeservar que existieron aduanas donde su cobro máximo alcanzó el valor más alto de los 4 años, reflejando que este costo se llegó a incremente abismalmente por las medidas de bioseguridad implementadas.
 
 ```{r}
-
 costo_mercancia <- function(tablas_año, año){
-  costos_dolares <- numeric()
+  costos_dolares <- numeric()  # Crear un vector vacío para los costos
   
   for (tabla in tablas_año) {
-    valores <- get(tabla)$PBK * get(tabla)$VACID
-    
-    costos_dolares <- c(costos_dolares, valores)
+    valores <- get(tabla)$PBK * get(tabla)$VACID  # Calcular el costo
+    costos_dolares <- c(costos_dolares, valores)  # Agregar los valores al vector
   }
   
   
-  # Calcular estadísticas descriptivas extendidas
+  # Calcular estadísticas descriptivas
   df_resumen <- data.frame(
-    Año = año,
+    MERCANCIA_Año = año,
     Min = min(costos_dolares, na.rm = TRUE),
     Mean = mean(costos_dolares, na.rm = TRUE),
     Max = max(costos_dolares, na.rm = TRUE),
-    Varianza = var(costos_dolares, na.rm = TRUE),
-    Desviacion_Estandar = sd(costos_dolares, na.rm = TRUE),
-    Sesgo = skewness(costos_dolares, na.rm = TRUE)
+    Desviacion_Estandar = sd(costos_dolares, na.rm = TRUE)
   )
   
   return(df_resumen)
 }
 
-# Ejemplos de uso
+# Ejemplos de uso con datos ficticios de tablas
 Costo_2019 <- costo_mercancia(tablas_2019, "2019")
 Costo_2020 <- costo_mercancia(tablas_2020, "2020")
 Costo_2021 <- costo_mercancia(tablas_2021, "2021")
 Costo_2022 <- costo_mercancia(tablas_2022, "2022")
 
-# Combinar todos los resúmenes en un solo data frame
-print(rbind(Costo_2019, Costo_2020, Costo_2021, Costo_2022))
+# Combinamos todos los resúmenes en un solo data frame
+print(rbind(Costo_2019, Costo_2020, Costo_2021,Costo_2022))
 
 ```
 
-- **4.0** NICOLAS:
+Por este lado vemos que el costo de la mercancía en promedio se mantuvo relativamente estable con una disminución notable en 2020 (inicio de pandemia) y que tuvo un posterior pico en 2022 donde la actividad se incrementó, tras investigaciones nuestra conjetura es que durante pandemia mucha gente empezó negocios onlines y las compras en línea (principalmente de mercados internacionales) se incrementó al abrir este ventana digital lo que refleja el impacto de la pandemia que podría llegar a verse como positivo. También podemos ver que los valores más bajos de las mediciiones están en 2020 reflejando la recesión económica por el miedo y la incertidumbre de este hecho. Debemos mencionar que ladesviación estándar demayor magnitud es de 2022, lo que indica una gran diferencia de precios con respecto a la mediana, estopodría indicar que estas nuevas importaciones derivadas de las compras online eran más costosas que aquellas que llegaban normalmente.
+
+-   **4.0** NICOLAS:
 
 Gráficos sobre las frecuencias absolutas de importaciones en cada año:
 
@@ -616,7 +611,8 @@ for (año_tablas in años) {
 }
 ```
 
-- **5. Conclusiones**
-Através de nuestro estudio logramos observar que efectivamente la pandemia comprometió las actividades de importación, siendo reflejado en una **disminución** de frecuencia, del precio y del costo del flete durante el 2019 que fue el atisbo del suceso, donde podemos llamar al acontecimiento como una recesión económica y después se refleja una alza exponencial dentro de 2021 y 2022 después de pandemia donde los items analizados se dispararon  
+-   **5. Conclusiones** Através de nuestro estudio logramos observar que efectivamente la pandemia comprometió las actividades de importación, siendo reflejado en una **disminución** de frecuencia, del precio total de mercancía y del costo del flete durante el 2020 que fue el año central del suceso, donde podemos llamar al acontecimiento como una recesión económica y después se refleja una alza exponencial dentro de 2021 y 2022 después de pandemia donde los items analizados se dispararon , principalmente en 2022 donde, como comentabamos, tenemos la conjetura que fue por el crecimiento de las compras online lo que llevo a la llegada de muchas más importaciones, probablemente de mayor valor a diferencia de las acostumbradas a llegar.
 
+También hacemos mención a que las importaciones nos aydaron a reflejar por completo el suceso de pandemia puesto que mostro la excases a finales de 2019 y todo el 2020, el crecimiento inestable de 2020 y el crecimeinto exponencial de 2021 y 2022. Entendemos que las importaciones tambiés se pudieron ver afectadas por otros facores como el ambiental el politico etc...
 
+MENCIONAR LOS MEDIOS DE TRANSPORTE
