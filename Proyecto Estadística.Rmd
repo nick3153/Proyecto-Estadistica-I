@@ -59,7 +59,7 @@ Los datos se almacenan en una base de datos proporcionada por ANDA, que cuenta c
 Algo que también nos parecio curioso es que hay dos variables llamadas Pais de Procedencia (PAISPRO) y Pais de Compra (PAISCOM), que a veces son iguales pero en la mayoría de casos es diferente lo que hace pensar que muchas mercancías son hechas en un país (PAISPRO) y son vendidas desde otros pais (PAISCOM), nos parecio curioso.
 
 | Variable | Descripción | Variable | Descripción |
-|----|----|----|----|
+|----------------|------------------|------------------|------------------|
 | FECH | Fecha de proceso | CUIDAIMP | Ciudad del importador |
 | ADUA | Código de la aduana | CUIDAEXP | Ciudad del exportador |
 | PAISGEN | País origen | ACTECON | Actividad económica |
@@ -558,6 +558,8 @@ años <- list(tablas_2019, tablas_2020, tablas_2021, tablas_2022)
 
 for (año_tablas in años) {
   
+  año <- gsub(".*_", "", año_tablas[[1]])
+  
   # Lista vacía para almacenar las frecuencias de transportes por mes
   frecuencias_transportes <- list()
   
@@ -591,12 +593,12 @@ for (año_tablas in años) {
     ungroup()
   
   # Graficar con ggplot2
-  ggplot(transportes_totales, aes(x = Mes, y = Cantidad, fill = factor(Tipo_Transporte))) +
+  print(ggplot(transportes_totales, aes(x = Mes, y = Cantidad, fill = factor(Tipo_Transporte))) +
     geom_bar(stat = "identity", position = "stack", color = "black") +
     scale_fill_brewer(palette = "Set3") +  # Cambiar la paleta de colores para mejor visualización
     theme_minimal() +
     labs(
-      title = paste("Cantidad Total de Transportes por Mes -", gsub("_.*", "", año_tablas[1])),
+      title = paste("Cantidad Total de Transportes por Mes -", año),
       x = "Mes",
       y = "Cantidad Total de Transportes",
       fill = "Tipo de Transporte"
@@ -604,7 +606,7 @@ for (año_tablas in años) {
     theme(
       axis.text.x = element_text(angle = 45, hjust = 1),  # Rotar las etiquetas de los meses para legibilidad
       plot.title = element_text(hjust = 0.5)  # Centrar el título
-    )
+    ))
   
   # Mostrar los datos totales por mes y tipo de transporte
   print(transportes_totales)
