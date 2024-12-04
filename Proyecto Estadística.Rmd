@@ -37,12 +37,13 @@ Esperamos que nuestro análisis ayude al consumidor a ver como las mercancias se
 ```{r}
 #install.packages("dplyr")
 #install.packages("ggplot2")
-library("ggplot2")
+library(ggplot2)
 library(dplyr)
 library(scales)
+library(lsr)
+library(moments)
 ```
 
-COLOCAR LAS DEMÁS--------------------------------------------------------------
 
 ## **3. Preparación de los datos**
 
@@ -87,28 +88,7 @@ Algo que también nos parecio curioso es que hay dos variables llamadas Pais de 
 
 Los archivos están muy bien estandarizados, el primer paso de la limpieza fue ir descargando los .zip de cada mes de cada año para extraer el .csv de su año correspondiente, seguimos importando y extrayendo los datos necesarios a través de RMarkdown, donde devimos hacer lectura de .csv aclarando que el primero año esta separado por "," y los demás años por ";". Además que principalmente en la columna de mercancias y algunos datos aparentemente tipo numérico venian con tipo "character" lo que nos obligo a hacer una limpieza de este item:
 
-ACA SE COLOCA LA SECCION DE R DONDE ESTA LA EXTRACCIÓN Y LIMPIEZA DE DATOS.
-
-TERMINAR - - - - - - - - - - - -
-
--   **3.4.** Una vez que sus datos estén limpios, muestre cómo se ve el conjunto de datos final. Sin embargo, no imprima un marco de datos con más de 200 filas; muéstreme los datos en la forma más condensada posible.
-
--   **3.5.** Proporcione información resumida sobre las variables de interés en su conjunto de datos limpios. No se limite a imprimir un montón de fragmentos de código con str(), summary(), etc. Más bien, proporcione una explicación consolidada, ya sea con una tabla que proporcione información resumida para cada variable o un párrafo de resumen.
-
-CODIGO
-
-###Posibles gráficas básicas Diagramas de barras para cada uno... \* Frecuencias de los paises de procedencia \* Frecuencias de los paises de compra \* Frecuencias de los ciudades que más exportan hacia colombia \* Frecuencias de las cada ciudad que reciben \* Cantidad de dinero en mercancias le llegó a cada departamento \* Gráfica de torta para las ciudades a donde llega la mercancia, por año, cuanto porcentaje llega a bogotá, a medellin, etc... \* Gráfica de medios de transporte y su precio
-
-###Posibles cálculos \* Ver qué probabilidad hay de que X país de origen nos envién una mercancía a X ciudad \* Ver que probabilidad hay de que la mercancia llegue a Bogotá/Medellin/Buenaventura/cali/pererira
-
--   Promedio, mediana de mercancia por ciudades
--   Calcular los aranceles de cada aduana -\> saber cual fue la más cara y la más económica
-
-TERMINAR DE ARREGLAR TEXTO
-
----------------------------------------------------------- INICIO DE CÓDIGO ----------------------------------------------------------
-
-Cargue de archivos y data:
+Cargue de archivos y data:No correr:
 
 ```{r}
 # Define la ruta base de los arvhivos
@@ -174,8 +154,7 @@ Diciembre_2022 <- read.csv(file.path(ruta_base, "Impo_2022/12. Diciembre.csv"), 
 
 ```
 
-Gráficos sobre las frecuencias absolutas de importaciones en cada año:
-
+Extracción de columnas
 ```{r}
 COLUMNAS <- c("PBK", "CODLUIN","DEPTODES", "VIATRANS", "FLETE", "VACID", "VADUA", "VIATRANS") 
 
@@ -193,6 +172,182 @@ Octubre_2019 <- Octubre_2019 %>% select(all_of(COLUMNAS))
 Noviembre_2019 <- Noviembre_2019 %>% select(all_of(COLUMNAS))
 Diciembre_2019 <- Diciembre_2019 %>% select(all_of(COLUMNAS))
 
+Enero_2020 <- Enero_2020 %>% select(all_of(COLUMNAS))
+Febrero_2020 <- Febrero_2020 %>% select(all_of(COLUMNAS))
+Marzo_2020 <- Marzo_2020 %>% select(all_of(COLUMNAS))
+Abril_2020 <- Abril_2020 %>% select(all_of(COLUMNAS))
+Mayo_2020 <- Mayo_2020 %>% select(all_of(COLUMNAS))
+Junio_2020 <- Junio_2020 %>% select(all_of(COLUMNAS))
+Julio_2020 <- Julio_2020 %>% select(all_of(COLUMNAS))
+Agosto_2020 <- Agosto_2020 %>% select(all_of(COLUMNAS))
+Septiembre_2020 <- Septiembre_2020 %>% select(all_of(COLUMNAS))
+Octubre_2020 <- Octubre_2020 %>% select(all_of(COLUMNAS))
+Noviembre_2020 <- Noviembre_2020 %>% select(all_of(COLUMNAS))
+Diciembre_2020 <- Diciembre_2020 %>% select(all_of(COLUMNAS))
+
+Enero_2021 <- Enero_2021 %>% select(all_of(COLUMNAS))
+Febrero_2021 <- Febrero_2021 %>% select(all_of(COLUMNAS))
+Marzo_2021 <- Marzo_2021 %>% select(all_of(COLUMNAS))
+Abril_2021 <- Abril_2021 %>% select(all_of(COLUMNAS))
+Mayo_2021 <- Mayo_2021 %>% select(all_of(COLUMNAS))
+Junio_2021 <- Junio_2021 %>% select(all_of(COLUMNAS))
+Julio_2021 <- Julio_2021 %>% select(all_of(COLUMNAS))
+Agosto_2021 <- Agosto_2021 %>% select(all_of(COLUMNAS))
+Septiembre_2021 <- Septiembre_2021 %>% select(all_of(COLUMNAS))
+Octubre_2021 <- Octubre_2021 %>% select(all_of(COLUMNAS))
+Noviembre_2021 <- Noviembre_2021 %>% select(all_of(COLUMNAS))
+Diciembre_2021 <- Diciembre_2021 %>% select(all_of(COLUMNAS))
+
+Enero_2022 <- Enero_2022 %>% select(all_of(COLUMNAS))
+Febrero_2022 <- Febrero_2022 %>% select(all_of(COLUMNAS))
+Marzo_2022 <- Marzo_2022 %>% select(all_of(COLUMNAS))
+Abril_2022 <- Abril_2022 %>% select(all_of(COLUMNAS))
+Mayo_2022 <- Mayo_2022 %>% select(all_of(COLUMNAS))
+Junio_2022 <- Junio_2022 %>% select(all_of(COLUMNAS))
+Julio_2022 <- Julio_2022 %>% select(all_of(COLUMNAS))
+Agosto_2022 <- Agosto_2022 %>% select(all_of(COLUMNAS))
+Septiembre_2022 <- Septiembre_2022 %>% select(all_of(COLUMNAS))
+Octubre_2022 <- Octubre_2022 %>% select(all_of(COLUMNAS))
+Noviembre_2022 <- Noviembre_2022 %>% select(all_of(COLUMNAS))
+Diciembre_2022 <- Diciembre_2022 %>% select(all_of(COLUMNAS))
+```
+
+
+Limpieza de datos: PBK, FLETES, VACID, VADUA, "VAFODO"
+
+```{r}
+# Listas de tablas y columnas para cada año
+tablas_2019 <- c("Enero_2019", "Febrero_2019", "Marzo_2019", "Abril_2019", "Mayo_2019",
+                        "Junio_2019", "Julio_2019", "Agosto_2019", "Septiembre_2019", "Octubre_2019", 
+                        "Noviembre_2019", "Diciembre_2019")
+                        
+tablas_2020 <- c("Enero_2020", "Febrero_2020", "Marzo_2020", "Abril_2020", "Mayo_2020", 
+                        "Junio_2020", "Julio_2020", "Agosto_2020", "Septiembre_2020", "Octubre_2020", 
+                        "Noviembre_2020", "Diciembre_2020")
+tablas_2021 <- c("Enero_2021", "Febrero_2021", "Marzo_2021", "Abril_2021", "Mayo_2021", 
+                        "Junio_2021", "Julio_2021", "Agosto_2021", "Septiembre_2021", "Octubre_2021", 
+                        "Noviembre_2021", "Diciembre_2021")
+tablas_2022 <- c("Enero_2022", "Febrero_2022", "Marzo_2022", "Abril_2022", "Mayo_2022", 
+                        "Junio_2022", "Julio_2022", "Agosto_2022", "Septiembre_2022", "Octubre_2022", 
+                        "Noviembre_2022", "Diciembre_2022")
+info_columnas <- c("PBK", "FLETE", "VACID", "VADUA")
+
+# Función mejorada para convertir las columnas de cada tabla
+convertir_columnas <- function(nombre_tablas, info_columnas) {
+  for(tabla in nombre_tablas) {
+    temp_tabla <- get(tabla)
+    for(columna in info_columnas) {
+      # Primero, eliminar cualquier espacio en blanco
+      temp_tabla[[columna]] <- trimws(temp_tabla[[columna]])
+      
+      # Reemplazar comas por puntos
+      temp_tabla[[columna]] <- gsub(",", ".", temp_tabla[[columna]])
+      
+      # Eliminar cualquier carácter no numérico excepto el punto decimal
+      temp_tabla[[columna]] <- gsub("[^0-9.]", "", temp_tabla[[columna]])
+      
+      # Convertir a numérico, con manejo de NA
+      temp_tabla[[columna]] <- as.numeric(temp_tabla[[columna]])
+    }
+    assign(tabla, temp_tabla, envir = .GlobalEnv)
+  }
+}
+
+# Convertir las columnas de cada año
+convertir_columnas(tablas_2019, info_columnas)
+convertir_columnas(tablas_2020, info_columnas)
+convertir_columnas(tablas_2021, info_columnas)
+convertir_columnas(tablas_2022, info_columnas)
+
+```
+
+
+
+-   **3.4.** Conjunto de datos final:
+Realizada la limpieza de datos, debemos mencionar que esta fue realizada a cad uno de los 48 meses con los que trabajamos, por lo tanto, mostramos una visra general de uno de los mese (que se repite en los demás meses)
+
+```{r}
+print(head(Enero_2021,10))
+```
+
+-   **3.5.** Proporcione información resumida sobre las variables de interés en su conjunto de datos limpios. No se limite a imprimir un montón de fragmentos de código con str(), summary(), etc. Más bien, proporcione una explicación consolidada, ya sea con una tabla que proporcione información resumida para cada variable o un párrafo de resumen.
+
+Nuestro análisis gráfico abordó todas las variables generales del análisis, sin embargo, un dato que poco estudiamos fue el valor de las Aduana ya que este fluctua por el departamento y su administración política, por lo que de este datos si podemos obtener datos básicos como:
+
+```{r}
+valores_VADUA <- function(tablas_año, año){
+  valores_VADUA <- numeric()
+  
+  for (tabla in tablas_año) {
+    valores <- get(tabla)$VADUA
+    valores_VADUA <- c(valores_VADUA, valores)
+  }
+  resumen_total <- summary(valores_VADUA)
+  
+  # Crear data frame manteniendo la estructura correcta
+  df_resumen <- data.frame(
+    Año = año,
+    Min = as.numeric(resumen_total["Min."]),
+    Mean = as.numeric(resumen_total["Mean"]),
+    Max = as.numeric(resumen_total["Max."])
+  )
+  
+  return(df_resumen)
+}
+
+# Ejemplos de uso
+VADUA_2019 <- valores_VADUA(tablas_2019, "2019")
+VADUA_2020 <- valores_VADUA(tablas_2020, "2020")
+VADUA_2021 <- valores_VADUA(tablas_2021, "2021")
+VADUA_2022 <- valores_VADUA(tablas_2022, "2022")
+
+# Combinar todos los resúmenes en un solo data frame
+print(resumen_final <- rbind(VADUA_2019, VADUA_2020, VADUA_2021, VADUA_2022))
+```
+
+
+```{r}
+
+costo_mercancia <- function(tablas_año, año){
+  costos_dolares <- numeric()
+  
+  for (tabla in tablas_año) {
+    valores <- get(tabla)$PBK * get(tabla)$VACID
+    
+    costos_dolares <- c(costos_dolares, valores)
+  }
+  
+  
+  # Calcular estadísticas descriptivas extendidas
+  df_resumen <- data.frame(
+    Año = año,
+    Min = min(costos_dolares, na.rm = TRUE),
+    Mean = mean(costos_dolares, na.rm = TRUE),
+    Max = max(costos_dolares, na.rm = TRUE),
+    Varianza = var(costos_dolares, na.rm = TRUE),
+    Desviacion_Estandar = sd(costos_dolares, na.rm = TRUE),
+    Sesgo = skewness(costos_dolares, na.rm = TRUE)
+  )
+  
+  return(df_resumen)
+}
+
+# Ejemplos de uso
+Costo_2019 <- costo_mercancia(tablas_2019, "2019")
+Costo_2020 <- costo_mercancia(tablas_2020, "2020")
+Costo_2021 <- costo_mercancia(tablas_2021, "2021")
+Costo_2022 <- costo_mercancia(tablas_2022, "2022")
+
+# Combinar todos los resúmenes en un solo data frame
+print(rbind(Costo_2019, Costo_2020, Costo_2021, Costo_2022))
+
+```
+
+- **4.0** NICOLAS:
+
+Gráficos sobre las frecuencias absolutas de importaciones en cada año:
+
+```{r}
 #Data frame 2019
 datos_2019 <- data.frame(
   Mes = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
@@ -227,38 +382,6 @@ ggplot(data = datos_2019, aes(x = Mes, y = FrecuenciaAbsoluta)) +
 ```
 
 ```{r}
-Enero_2020 <- Enero_2020 %>% select(all_of(COLUMNAS))
-Febrero_2020 <- Febrero_2020 %>% select(all_of(COLUMNAS))
-Marzo_2020 <- Marzo_2020 %>% select(all_of(COLUMNAS))
-Abril_2020 <- Abril_2020 %>% select(all_of(COLUMNAS))
-Mayo_2020 <- Mayo_2020 %>% select(all_of(COLUMNAS))
-Junio_2020 <- Junio_2020 %>% select(all_of(COLUMNAS))
-Julio_2020 <- Julio_2020 %>% select(all_of(COLUMNAS))
-Agosto_2020 <- Agosto_2020 %>% select(all_of(COLUMNAS))
-Septiembre_2020 <- Septiembre_2020 %>% select(all_of(COLUMNAS))
-Octubre_2020 <- Octubre_2020 %>% select(all_of(COLUMNAS))
-Noviembre_2020 <- Noviembre_2020 %>% select(all_of(COLUMNAS))
-Diciembre_2020 <- Diciembre_2020 %>% select(all_of(COLUMNAS))
-
-#Data frame 2020
-datos_2020 <- data.frame(
-  Mes = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
-          "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"),
-  FrecuenciaAbsoluta = c(
-    sum(table(Enero_2020$CODLUIN)),
-    sum(table(Febrero_2020$CODLUIN)),
-    sum(table(Marzo_2020$CODLUIN)),
-    sum(table(Abril_2020$CODLUIN)),
-    sum(table(Mayo_2020$CODLUIN)),
-    sum(table(Junio_2020$CODLUIN)),
-    sum(table(Julio_2020$CODLUIN)),
-    sum(table(Agosto_2020$CODLUIN)),
-    sum(table(Septiembre_2020$CODLUIN)),
-    sum(table(Octubre_2020$CODLUIN)),
-    sum(table(Noviembre_2020$CODLUIN)),
-    sum(table(Diciembre_2020$CODLUIN))
-  )
-)
 #Data frame para el ggplot
 datos_2020$Mes <- factor(datos_2020$Mes, levels = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
                                                     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"))
@@ -274,19 +397,6 @@ ggplot(data = datos_2020, aes(x = Mes, y = FrecuenciaAbsoluta)) +
 ```
 
 ```{r}
-Enero_2021 <- Enero_2021 %>% select(all_of(COLUMNAS))
-Febrero_2021 <- Febrero_2021 %>% select(all_of(COLUMNAS))
-Marzo_2021 <- Marzo_2021 %>% select(all_of(COLUMNAS))
-Abril_2021 <- Abril_2021 %>% select(all_of(COLUMNAS))
-Mayo_2021 <- Mayo_2021 %>% select(all_of(COLUMNAS))
-Junio_2021 <- Junio_2021 %>% select(all_of(COLUMNAS))
-Julio_2021 <- Julio_2021 %>% select(all_of(COLUMNAS))
-Agosto_2021 <- Agosto_2021 %>% select(all_of(COLUMNAS))
-Septiembre_2021 <- Septiembre_2021 %>% select(all_of(COLUMNAS))
-Octubre_2021 <- Octubre_2021 %>% select(all_of(COLUMNAS))
-Noviembre_2021 <- Noviembre_2021 %>% select(all_of(COLUMNAS))
-Diciembre_2021 <- Diciembre_2021 %>% select(all_of(COLUMNAS))
-
 #Data frame 2021
 datos_2021 <- data.frame(
   Mes = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
@@ -321,19 +431,6 @@ ggplot(data = datos_2021, aes(x = Mes, y = FrecuenciaAbsoluta)) +
 ```
 
 ```{r}
-Enero_2022 <- Enero_2022 %>% select(all_of(COLUMNAS))
-Febrero_2022 <- Febrero_2022 %>% select(all_of(COLUMNAS))
-Marzo_2022 <- Marzo_2022 %>% select(all_of(COLUMNAS))
-Abril_2022 <- Abril_2022 %>% select(all_of(COLUMNAS))
-Mayo_2022 <- Mayo_2022 %>% select(all_of(COLUMNAS))
-Junio_2022 <- Junio_2022 %>% select(all_of(COLUMNAS))
-Julio_2022 <- Julio_2022 %>% select(all_of(COLUMNAS))
-Agosto_2022 <- Agosto_2022 %>% select(all_of(COLUMNAS))
-Septiembre_2022 <- Septiembre_2022 %>% select(all_of(COLUMNAS))
-Octubre_2022 <- Octubre_2022 %>% select(all_of(COLUMNAS))
-Noviembre_2022 <- Noviembre_2022 %>% select(all_of(COLUMNAS))
-Diciembre_2022 <- Diciembre_2022 %>% select(all_of(COLUMNAS))
-
 #Data frame 2022
 datos_2022 <- data.frame(
   Mes = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
@@ -389,55 +486,6 @@ ggplot(data = promedios_anuales, aes(x = factor(Año), y = Promedio)) +
   scale_y_continuous(labels = comma)
 
 ```
-
-Limpieza de datos: PBK, FLETES, VACID, VADUA, "VAFODO"
-
-```{r}
-# Listas de tablas y columnas para cada año
-# Listas de tablas y columnas para cada año
-tablas_2019 <- c("Enero_2019", "Febrero_2019", "Marzo_2019", "Abril_2019", "Mayo_2019",
-                        "Junio_2019", "Julio_2019", "Agosto_2019", "Septiembre_2019", "Octubre_2019", 
-                        "Noviembre_2019", "Diciembre_2019")
-                        
-tablas_2020 <- c("Enero_2020", "Febrero_2020", "Marzo_2020", "Abril_2020", "Mayo_2020", 
-                        "Junio_2020", "Julio_2020", "Agosto_2020", "Septiembre_2020", "Octubre_2020", 
-                        "Noviembre_2020", "Diciembre_2020")
-tablas_2021 <- c("Enero_2021", "Febrero_2021", "Marzo_2021", "Abril_2021", "Mayo_2021", 
-                        "Junio_2021", "Julio_2021", "Agosto_2021", "Septiembre_2021", "Octubre_2021", 
-                        "Noviembre_2021", "Diciembre_2021")
-tablas_2022 <- c("Enero_2022", "Febrero_2022", "Marzo_2022", "Abril_2022", "Mayo_2022", 
-                        "Junio_2022", "Julio_2022", "Agosto_2022", "Septiembre_2022", "Octubre_2022", 
-                        "Noviembre_2022", "Diciembre_2022")
-info_columnas <- c("PBK", "FLETE", "VACID", "VADUA")
-
-# Función mejorada para convertir las columnas de cada tabla
-convertir_columnas <- function(nombre_tablas, info_columnas) {
-  for(tabla in nombre_tablas) {
-    temp_tabla <- get(tabla)
-    for(columna in info_columnas) {
-      # Primero, eliminar cualquier espacio en blanco
-      temp_tabla[[columna]] <- trimws(temp_tabla[[columna]])
-      
-      # Reemplazar comas por puntos
-      temp_tabla[[columna]] <- gsub(",", ".", temp_tabla[[columna]])
-      
-      # Eliminar cualquier carácter no numérico excepto el punto decimal
-      temp_tabla[[columna]] <- gsub("[^0-9.]", "", temp_tabla[[columna]])
-      
-      # Convertir a numérico, con manejo de NA
-      temp_tabla[[columna]] <- as.numeric(temp_tabla[[columna]])
-    }
-    assign(tabla, temp_tabla, envir = .GlobalEnv)
-  }
-}
-
-# Convertir las columnas de cada año
-convertir_columnas(tablas_2019, info_columnas)
-convertir_columnas(tablas_2020, info_columnas)
-convertir_columnas(tablas_2021, info_columnas)
-convertir_columnas(tablas_2022, info_columnas)
-```
-
 
 ```{r}
 # Función para calcular el total de importaciones por año
@@ -511,10 +559,6 @@ ggplot(fletes_totales, aes(x = factor(Año), y = Flete_Total)) +
 ```
 
 ```{r}
-# Cargar librerías necesarias
-library(ggplot2)
-library(dplyr)
-
 años <- list(tablas_2019, tablas_2020, tablas_2021, tablas_2022)
 
 for (año_tablas in años) {
@@ -571,3 +615,8 @@ for (año_tablas in años) {
   print(transportes_totales)
 }
 ```
+
+- **5. Conclusiones**
+Através de nuestro estudio logramos observar que efectivamente la pandemia comprometió las actividades de importación, siendo reflejado en una **disminución** de frecuencia, del precio y del costo del flete durante el 2019 que fue el atisbo del suceso, donde podemos llamar al acontecimiento como una recesión económica y después se refleja una alza exponencial dentro de 2021 y 2022 después de pandemia donde los items analizados se dispararon  
+
+
