@@ -1,5 +1,8 @@
 install.packages("dplyr")
 install.packages("ggplot2")
+install.packages("lsr")
+install.packages("moments")
+install.packages("scales")
 library(ggplot2)
 library(dplyr)
 library(scales)
