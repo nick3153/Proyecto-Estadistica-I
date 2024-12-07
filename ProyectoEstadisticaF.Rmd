@@ -47,7 +47,7 @@ Los datos se almacenan en una base de datos proporcionada por ANDA, que cuenta c
 Algo que también nos parecio curioso es que hay dos variables llamadas Pais de Procedencia (PAISPRO) y Pais de Compra (PAISCOM) que, en algunos casos, son iguales pero en la mayoría de casos es diferente lo que hace pensar que muchas mercancías son hechas en un país (PAISPRO) y son vendidas desde otros pais (PAISCOM), nos parecio curioso.
 
 | Variable | Descripción | Variable | Descripción |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | FECH | Fecha de proceso | CUIDAIMP | Ciudad del importador |
 | ADUA | Código de la aduana | CUIDAEXP | Ciudad del exportador |
 | PAISGEN | País origen | ACTECON | Actividad económica |
@@ -71,8 +71,6 @@ Algo que también nos parecio curioso es que hay dos variables llamadas Pais de 
 | OTDER | Otros Derechos | RZIMPO | Razón social del importador |
 | CLASE | Clase de importador | DEREL | Derechos Arancelarios |
 
-
-
 -   **2.5.** Información resumida:
 
 Nuestro análisis gráfico abordó todas las variables generales del análisis, sin embargo, un dato que poco estudiamos fue el valor de las Aduana ya que este fluctua por el departamento y su administración política, por lo que de este datos si podemos obtener datos básicos como:
@@ -81,66 +79,58 @@ En la obtención de los datos, se puede ver que promedio de los datos de 2019 y 
 
 Por este lado vemos que el costo de la mercancía en promedio se mantuvo relativamente estable con una disminución notable en 2020 (inicio de pandemia) y que tuvo un posterior pico en 2022 donde la actividad se incrementó, tras investigaciones nuestra conjetura es que durante pandemia mucha gente empezó negocios onlines y las compras en línea (principalmente de mercados internacionales) se incrementó al abrir este ventana digital lo que refleja el impacto de la pandemia que podría llegar a verse como positivo. También podemos ver que los valores más bajos de las mediciiones están en 2020 reflejando la recesión económica por el miedo y la incertidumbre de este hecho. Debemos mencionar que ladesviación estándar demayor magnitud es de 2022, lo que indica una gran diferencia de precios con respecto a la mediana, estopodría indicar que estas nuevas importaciones derivadas de las compras online eran más costosas que aquellas que llegaban normalmente.
 
-
 ### **3.Metodología**
-El primer paso de la limpieza fue ir descargando los archivos ".zip" de año a través del sitio elegido para obtención de datos (DANE), para extraer los ".csv" de cada mes del año correspondiente gracias a que los archivos están muy bien categorizados,  nos ahorro algo de tiempo. Seguimos importando y extrayendo los datos necesarios a través de R, donde debimos hacer lectura de ".csv" aclarando que el primer año esta separado por ";" y los demás años por ",", este proceso lo hicimos a través de la definción de una ruta base, lo que agiliza el codigo, que es la carpeta principal donde se guardaron todas las importaciones de los 4 años, en nuestra carpeta de drive vera una careta por cada año, lo ideal es que estas cuatros carpetar sean guardadas en una carpeta especifica cuya ruta será la ruta base. Teneindo en cuenta que RStudio no le los carctaeres de la ruta como "/" deben cmabiarse por "\\".
+
+El primer paso de la limpieza fue ir descargando los archivos ".zip" de año a través del sitio elegido para obtención de datos (DANE), para extraer los ".csv" de cada mes del año correspondiente gracias a que los archivos están muy bien categorizados, nos ahorro algo de tiempo. Seguimos importando y extrayendo los datos necesarios a través de R, donde debimos hacer lectura de ".csv" aclarando que el primer año esta separado por ";" y los demás años por ",", este proceso lo hicimos a través de la definción de una ruta base, lo que agiliza el codigo, que es la carpeta principal donde se guardaron todas las importaciones de los 4 años, en nuestra carpeta de drive vera una careta por cada año, lo ideal es que estas cuatros carpetar sean guardadas en una carpeta especifica cuya ruta será la ruta base. Teneindo en cuenta que RStudio no le los carctaeres de la ruta como "/" deben cmabiarse por "\\".
 
 Esto permitio la extracción hacia R de todos los datos de los ".CSV" a nuestro entornono de desarrollo. Una vez hicimos este proceso, continuamos limpiando los data frames originales con las columnas de los datos de interes (PBK, FLETES, VACID, VADUA, "VAFODO", entre otras posibles), obteniendo los ".CSV" limpios con las columnas necesarias a analizar.
 
-Se aplico una función de limpieza de columnas donde se convertian los datos en tipo"carcater" o "numeric" tal fuera necesaio para el análisis, además de eliminar espacios en blanco o datos vacios (NA), tambiés se onvirtieron los carctaeres de tipo "," a tipo "." para su procesaiento con las funciones de R.  
+Se aplico una función de limpieza de columnas donde se convertian los datos en tipo"carcater" o "numeric" tal fuera necesaio para el análisis, además de eliminar espacios en blanco o datos vacios (NA), tambiés se onvirtieron los carctaeres de tipo "," a tipo "." para su procesaiento con las funciones de R.
 
-El paso a continuación fue crear un data frame de cada año (tablas_año) donde guardamos las columnas de cda mes en una comluna mayor de su mes correspondiente, esto nos permitio tener un data frame general para cada  año y dandonos acceso rápido a cada los meses correspondientes. 
+El paso a continuación fue crear un data frame de cada año (tablas_año) donde guardamos las columnas de cda mes en una comluna mayor de su mes correspondiente, esto nos permitio tener un data frame general para cada año y dandonos acceso rápido a cada los meses correspondientes.
 
 Extracción de columnas de interes especifico con el fin de aligerar el peso de los data frame anteriores y a su vez filtrar por datos relevantes para este proyecto
 
-
-
-
-
 # **4. Resultados**
-    -   Frecuencias
 
-        En las siguientes graficas se puede observar el numero de importaciones que se realizaron todos los meses de los años 2019 al 2022.En el grafico del año 2020 se puede observar como la cantidad de importaciones disminuyo drasticamente los meses de Abril, Mayo y Junio, que es cercano a cuando se declaro pandemia en el pais (12 de marzo, 2020), de igual modo e puede observar como eventualmente el número de importaciones empieza a aumentar hasta volver a la normalidad como se puede observar en la ultima grafica con el promedio de importaciones mensuales de cada año, en el que en el año 2020 cayo casi 60000 puntos y al año siguiente aumento hasta que en el 2022 se volvio (y se supero) la cifra del año 2019. ![](images/Frecuencia%202019.jpeg) ![](images/Frecuencia%202020.jpeg) ![](images/Frecuencia%202021.jpeg) ![](images/Frecuencia%202022.jpeg) ![](images/Prom%20Frecuencias.jpeg)
+-   Frecuencias
 
-    -   Valor importado
-En la grafica se puede observar lo que se mencionaba anteriormente, como la actividad de importación desde el exterior vivio un momento de recesión por el momento historico que se vivio (la pandemia por COVID-19) y como esta actividad se recupera poco a poco. Esto destaca la resilencia del comercio internacional despues de haber pasado por un evento disruptivo. ![](images/Valor importación.jpeg)
+    En las siguientes graficas se puede observar el numero de importaciones que se realizaron todos los meses de los años 2019 al 2022.En el grafico del año 2020 se puede observar como la cantidad de importaciones disminuyo drasticamente los meses de Abril, Mayo y Junio, que es cercano a cuando se declaro pandemia en el pais (12 de marzo, 2020), de igual modo e puede observar como eventualmente el número de importaciones empieza a aumentar hasta volver a la normalidad como se puede observar en la ultima grafica con el promedio de importaciones mensuales de cada año, en el que en el año 2020 cayo casi 60000 puntos y al año siguiente aumento hasta que en el 2022 se volvio (y se supero) la cifra del año 2019. ![](images/Frecuencia%202019.jpeg) ![](images/Frecuencia%202020.jpeg) ![](images/Frecuencia%202021.jpeg) ![](images/Frecuencia%202022.jpeg) ![](images/Prom%20Frecuencias.jpeg)
 
-    -   Flete
+-   Valor importado
+
+En la grafica se puede observar lo que se mencionaba anteriormente, como la actividad de importación desde el exterior vivio un momento de recesión por el momento historico que se vivio (la pandemia por COVID-19) y como esta actividad se recupera poco a poco. Esto destaca la resilencia del comercio internacional despues de haber pasado por un evento disruptivo. ![](images/Valor%20importación.jpeg)
+
+-   Flete
 
 En la grafica se puede observar como el valor promedio del flete de por año cambia y va en aumenta, pero como se puede observar no es un cambia brusco, por que este cambio podemos supones, que no estan iinfluenciados unica y principalmente por la pandemia, sino que más bien, se debe a una mezcla de factores como lo fueron la pandemia la política nacional e internacional, así como también la producción del pais, exportaciones, etc...(PIB).![](images/Valor%20del%20Flete.jpeg)
 
-```         
 -   Tipo de transporte
-```
 
 En las graficas se puede observar el tipo de transporte que más se usa para realizar importaciones en las que se puede observar que el tipo de transporte preferido es por via maritima, terrestre y aerea. Así también, se puede observar que el tipo de transporte terrestre disminuyo desde el mes de abril del año 2020 debido a un control más estricto por parte de las autoridades en las fronteras; además, se puede observar como el uso de esta forma de transporte se fue recuperando poco a poco.
 
-1	MARITIMO\
+1 MARITIMO\
 
-2	FERREO\
+2 FERREO\
 
-3	TERRESTRE\
+3 TERRESTRE\
 
-4	AEREO\
+4 AEREO\
 
-5	CORREO\
+5 CORREO\
 
-6	MULTIMODAL\
+6 MULTIMODAL\
 
-7	INSTALACIONES DE TRANSPORTE FIJAS (TUBERIAS, CABLE, ETC.)\
+7 INSTALACIONES DE TRANSPORTE FIJAS (TUBERIAS, CABLE, ETC.)\
 
-8	VIAS NAVEGABLES INTERIORES\
+8 VIAS NAVEGABLES INTERIORES\
 
-9	OTRO MODO DE TRANSPORTE![](images/Transporte%202019.jpeg) ![](images/Transporte%202020.jpeg) ![](images/Transporte%202021.jpeg) ![](images/Transporte%202022.jpeg)
+9 OTRO MODO DE TRANSPORTE![](images/Transporte%202019.jpeg) ![](images/Transporte%202020.jpeg) ![](images/Transporte%202021.jpeg) ![](images/Transporte%202022.jpeg)
 
+# **5. Conclusiones**
 
-
-# **5. Conclusiones** 
-
-  Através de nuestro estudio logramos observar que efectivamente la pandemia comprometió las actividades de importación, siendo reflejado en una **disminución** de frecuencia, del precio total de mercancía y del costo del flete durante el 2020 que fue el año central del suceso, donde podemos llamar al acontecimiento como una recesión económica y después se refleja una alza exponencial dentro de 2021 y 2022 después de pandemia donde los items analizados se dispararon , principalmente en 2022 donde, como comentabamos, tenemos la conjetura que fue por el crecimiento de las compras online lo que llevo a la llegada de muchas más importaciones, probablemente de mayor valor a diferencia de las acostumbradas a llegar.
+Através de nuestro estudio logramos observar que efectivamente la pandemia comprometió las actividades de importación, siendo reflejado en una **disminución** de frecuencia, del precio total de mercancía y del costo del flete durante el 2020 que fue el año central del suceso, donde podemos llamar al acontecimiento como una recesión económica y después se refleja una alza exponencial dentro de 2021 y 2022 después de pandemia donde los items analizados se dispararon , principalmente en 2022 donde, como comentabamos, tenemos la conjetura que fue por el crecimiento de las compras online lo que llevo a la llegada de muchas más importaciones, probablemente de mayor valor a diferencia de las acostumbradas a llegar.
 
 Por otro lado, debemos mencionar que ell costo de los fletes que es el costo total del valor del transporte de cada mercancia era bastante bajo en 2019 yy tuve un crecimiento leve en 2020 pero se fue al alza con rapidez en 2021-2022, la conjetura del motivo son las implentaciones de medidas de bioseguridad y revisión de las cargas por parte de entidades de salubridad para el manejo y discipación del virus.
 
 También hacemos mención a que las importaciones nos aydaron a reflejar por completo el suceso de pandemia puesto que mostro la excases a finales de 2019 y todo el 2020, el crecimiento inestable de 2020 y el crecimeinto exponencial de 2021 y 2022. Entendemos que las importaciones tambiés se pudieron ver afectadas por otros facores como el ambiental el politico etc...
-
-
