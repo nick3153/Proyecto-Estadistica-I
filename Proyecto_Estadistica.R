@@ -10,7 +10,7 @@ library(lsr)
 library(moments)
 
 # Define la ruta base de los archivos
-ruta_base <- "C:/Users/angel/Documents/1. UNIVERSIDAD/5TO SEMESTRE/ESTADISTICA/Proyecto Final"
+ruta_base <- "C:\\Users\\angel\\Documents\\1. UNIVERSIDAD\\5TO SEMESTRE\\ESTADISTICA\\Proyecto Final"
 
 # Lectura de los archivos 2019
 Enero_2019  <- read.csv(file.path(ruta_base, "Impo_2019/1. Enero_2019.csv"), sep = ";")
@@ -267,7 +267,9 @@ ggplot(data = datos_2019, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma)
 
-#Data frame para el ggplot
+
+
+#Data frame para el ggplot 2020
 datos_2020$Mes <- factor(datos_2020$Mes, levels = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
                                                     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"))
 
@@ -279,7 +281,42 @@ ggplot(data = datos_2020, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma)
 
-#Data frame 2021
+
+
+# Data frame 2020
+datos_2020 <- data.frame(
+  Mes = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+          "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"),
+  FrecuenciaAbsoluta = c(
+    sum(table(Enero_2020$CODLUIN)),
+    sum(table(Febrero_2020$CODLUIN)),
+    sum(table(Marzo_2020$CODLUIN)),
+    sum(table(Abril_2020$CODLUIN)),
+    sum(table(Mayo_2020$CODLUIN)),
+    sum(table(Junio_2020$CODLUIN)),
+    sum(table(Julio_2020$CODLUIN)),
+    sum(table(Agosto_2020$CODLUIN)),
+    sum(table(Septiembre_2020$CODLUIN)),
+    sum(table(Octubre_2020$CODLUIN)),
+    sum(table(Noviembre_2020$CODLUIN)),
+    sum(table(Diciembre_2020$CODLUIN))
+  )
+)
+# Data frame para el ggplot
+datos_2020$Mes <- factor(datos_2020$Mes, levels = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+                                                    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre",
+                                                    "Diciembre"))
+
+# Crear el gráfico de barras
+ggplot(data = datos_2020, aes(x = Mes, y = FrecuenciaAbsoluta)) +
+  geom_col(fill = "#41018d", color = "black", alpha = 0.7, position = position_dodge(width = 0.9)) +
+  labs(title = "Frecuencia de Importaciones mensuales de 2020", x = "Mes", y = "Frecuencia") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  scale_y_continuous(labels = comma)
+
+
+# Data frame 2021
 datos_2021 <- data.frame(
   Mes = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
           "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"),
@@ -298,7 +335,7 @@ datos_2021 <- data.frame(
     sum(table(Diciembre_2021$CODLUIN))
   )
 )
-#Data frame para el ggplot
+# Data frame para el ggplot
 datos_2021$Mes <- factor(datos_2021$Mes, levels = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
                                                     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre",
                                                     "Diciembre"))
@@ -309,7 +346,8 @@ ggplot(data = datos_2021, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   labs(title = "Frecuencia de Importaciones mensuales de 2021", x = "Mes", y = "Frecuencia") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5)) +
-  scale_y_continuous(labels = comma) 
+  scale_y_continuous(labels = comma)
+
 
 #Data frame 2022
 datos_2022 <- data.frame(
@@ -342,7 +380,6 @@ ggplot(data = datos_2022, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma)
 
-# Calcular los promedio de Mercancía para cada año
 
 # Crear un dataframe consolidado
 promedios_anuales <- data.frame(
@@ -362,73 +399,68 @@ ggplot(data = promedios_anuales, aes(x = factor(Año), y = Promedio)) +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma)
 
-# Función para calcular el total de importaciones por año
-calcular_importacion_total <- function(nombre_tablas) {
-  impo_total <- 0
-  for(tabla in nombre_tablas) {
-    temp_tabla <- get(tabla)
-    impo_total <- impo_total + sum(temp_tabla$PBK * temp_tabla$VACID, na.rm = TRUE)
-  }
-  return(impo_total)
-}
-
-# Calcular las importaciones totales para cada año
-impo_total_2019 <- calcular_importacion_total(tablas_2019)
-impo_total_2020 <- calcular_importacion_total(tablas_2020)
-impo_total_2021 <- calcular_importacion_total(tablas_2021)
-impo_total_2022 <- calcular_importacion_total(tablas_2022)
 
 
-#REVISA DESDE AQUI BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU
-# Crear un data frame con las importaciones totales por año
-importaciones_totales <- data.frame(
-  Año = c(2019, 2020, 2021, 2022),
-  Importación_Total = c(impo_total_2019, impo_total_2020, impo_total_2021, impo_total_2022)
+# Calcular los promedio de Mercancía para cada año
+
+# Crear un data frame con los promedios de cada año
+costos_promedio <- data.frame(
+  Año = c("2019", "2020", "2021", "2022"),
+  #cosoto esta en el primer dataframe del archivo
+  Promedio_Costo = c(Costo_2019$Mean, Costo_2020$Mean, Costo_2021$Mean, Costo_2022$Mean)
 )
 
 # Crear gráfico de barras con ggplot2
-ggplot(importaciones_totales, aes(x = factor(Año), y = Importación_Total)) +
+ggplot(costos_promedio, aes(x = factor(Año), y = Promedio_Costo)) +
   geom_col(fill = "#2e2050", color = "black", alpha = 0.8) +
-  geom_text(aes(label = scales::comma(Importación_Total)), vjust = -0.5, size = 4) +
+  geom_text(aes(label = scales::comma(Promedio_Costo)), vjust = -0.5, size = 4) +
   theme_minimal() +
-  labs(title = "Precio de promedio de Importación por Año (en USD)", x = "Año", y = "Importación Total") +
+  labs(title = "Promedio de Costo de Mercancía por Año (en USD)", x = "Año", y = "Promedio de Costo") +
   theme(
     plot.title = element_text(hjust = 0.5)  # Centrar el título
   )
 
-# Función para calcular el total de importaciones por año
-calcular_flete_total <- function(nombre_tablas) {
-  flete_total <- 0
+
+# Función para calcular el promedio del flete total
+calcular_flete_promedio <- function(nombre_tablas) {
+  fletes_totales <- numeric()  # Crear un vector vacío para los fletes
+  
   for(tabla in nombre_tablas) {
     temp_tabla <- get(tabla)
-    flete_total <- flete_total + sum(temp_tabla$FLETE, na.rm = TRUE)
+    fletes_totales <- c(fletes_totales, temp_tabla$FLETE)  # Agregar los valores de flete al vector
   }
-  flete_total <- flete_total/length(get[nombre_tablas[1]$FLETE])
-  return(flete_total)
+  
+  # Calcular el promedio de los fletes
+  promedio_flete <- mean(fletes_totales, na.rm = TRUE)
+  
+  return(promedio_flete)
 }
 
+# Calcular el promedio de flete para cada año
+flete_promedio_2019 <- calcular_flete_promedio(tablas_2019)
+flete_promedio_2020 <- calcular_flete_promedio(tablas_2020)
+flete_promedio_2021 <- calcular_flete_promedio(tablas_2021)
+flete_promedio_2022 <- calcular_flete_promedio(tablas_2022)
 
-# Calcular las importaciones totales para cada año
-flete_total_2019 <- calcular_flete_total(tablas_2019)
-flete_total_2020 <- calcular_flete_total(tablas_2020)
-flete_total_2021 <- calcular_flete_total(tablas_2021)
-flete_total_2022 <- calcular_flete_total(tablas_2022)
-
-# Crear un data frame con las importaciones totales por año
-fletes_totales <- data.frame(
+# Crear un data frame con los promedios de flete por año
+fletes_promedio <- data.frame(
   Año = c(2019, 2020, 2021, 2022),
-  Flete_Total = c(flete_total_2019, flete_total_2020, flete_total_2021, flete_total_2022)
+  Flete_Promedio = c(flete_promedio_2019, flete_promedio_2020, flete_promedio_2021, flete_promedio_2022)
 )
 
 # Crear gráfico de barras con ggplot2
-ggplot(fletes_totales, aes(x = factor(Año), y = Flete_Total)) +
+ggplot(fletes_promedio, aes(x = factor(Año), y = Flete_Promedio)) +
   geom_col(fill = "#2e2050", color = "black", alpha = 0.8) +
-  geom_text(aes(label = scales::comma(Flete_Total)), vjust = -0.5, size = 4) +  # Agregar etiquetas encima de las barras
+  geom_text(aes(label = scales::comma(Flete_Promedio)), vjust = -0.5, size = 4) +  # Agregar etiquetas encima de las barras
   theme_minimal() +
-  labs(title = "Precio de Flete en Dólares por Año", x = "Año", y = "Precio Total de Flete") +
+  labs(title = "Promedio de Flete en Dólares por Año", x = "Año", y = "Promedio de Flete Total (USD)") +
   theme(
     plot.title = element_text(hjust = 0.5)  # Centrar el título
   )
+
+
+
+#Codifo de transportes NICOLAS
 
 años <- list(tablas_2019, tablas_2020, tablas_2021, tablas_2022)
 
