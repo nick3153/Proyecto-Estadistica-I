@@ -97,7 +97,7 @@ Extracción de columnas de interes especifico con el fin de aligerar el peso de 
 
 
 
-# **4. Resultados**
+# **Resultados**
     -   Frecuencias
 
         En las siguientes graficas se puede observar el numero de importaciones que se realizaron todos los meses de los años 2019 al 2022.En el grafico del año 2020 se puede observar como la cantidad de importaciones disminuyo drasticamente los meses de Abril, Mayo y Junio, que es cercano a cuando se declaro pandemia en el pais (12 de marzo, 2020), de igual modo e puede observar como eventualmente el número de importaciones empieza a aumentar hasta volver a la normalidad como se puede observar en la ultima grafica con el promedio de importaciones mensuales de cada año, en el que en el año 2020 cayo casi 60000 puntos y al año siguiente aumento hasta que en el 2022 se volvio (y se supero) la cifra del año 2019. ![](images/Frecuencia%202019.jpeg) ![](images/Frecuencia%202020.jpeg) ![](images/Frecuencia%202021.jpeg) ![](images/Frecuencia%202022.jpeg) ![](images/Prom%20Frecuencias.jpeg)
@@ -135,10 +135,8 @@ En las graficas se puede observar el tipo de transporte que más se usa para rea
 
 
 
-# **5. Conclusiones** Através de nuestro estudio logramos observar que efectivamente la pandemia comprometió las actividades de importación, siendo reflejado en una **disminución** de frecuencia, del precio total de mercancía y del costo del flete durante el 2020 que fue el año central del suceso, donde podemos llamar al acontecimiento como una recesión económica y después se refleja una alza exponencial dentro de 2021 y 2022 después de pandemia donde los items analizados se dispararon , principalmente en 2022 donde, como comentabamos, tenemos la conjetura que fue por el crecimiento de las compras online lo que llevo a la llegada de muchas más importaciones, probablemente de mayor valor a diferencia de las acostumbradas a llegar.
-
-Por otro lado, debemos mencionar que ell costo de los fletes que es el costo total del valor del transporte de cada mercancia era bastante bajo en 2019 yy tuve un crecimiento leve en 2020 pero se fue al alza con rapidez en 2021-2022, la conjetura del motivo son las implentaciones de medidas de bioseguridad y revisión de las cargas por parte de entidades de salubridad para el manejo y discipación del virus.
+-   **5. Conclusiones** Através de nuestro estudio logramos observar que efectivamente la pandemia comprometió las actividades de importación, siendo reflejado en una **disminución** de frecuencia, del precio total de mercancía y del costo del flete durante el 2020 que fue el año central del suceso, donde podemos llamar al acontecimiento como una recesión económica y después se refleja una alza exponencial dentro de 2021 y 2022 después de pandemia donde los items analizados se dispararon , principalmente en 2022 donde, como comentabamos, tenemos la conjetura que fue por el crecimiento de las compras online lo que llevo a la llegada de muchas más importaciones, probablemente de mayor valor a diferencia de las acostumbradas a llegar.
 
 También hacemos mención a que las importaciones nos aydaron a reflejar por completo el suceso de pandemia puesto que mostro la excases a finales de 2019 y todo el 2020, el crecimiento inestable de 2020 y el crecimeinto exponencial de 2021 y 2022. Entendemos que las importaciones tambiés se pudieron ver afectadas por otros facores como el ambiental el politico etc...
 
-
+MENCIONAR LOS MEDIOS DE TRANSPORTE
