@@ -47,7 +47,7 @@ Los datos se almacenan en una base de datos proporcionada por ANDA, que cuenta c
 Algo que también nos parecio curioso es que hay dos variables llamadas Pais de Procedencia (PAISPRO) y Pais de Compra (PAISCOM) que, en algunos casos, son iguales pero en la mayoría de casos es diferente lo que hace pensar que muchas mercancías son hechas en un país (PAISPRO) y son vendidas desde otros pais (PAISCOM), nos parecio curioso.
 
 | Variable | Descripción | Variable | Descripción |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | FECH | Fecha de proceso | CUIDAIMP | Ciudad del importador |
 | ADUA | Código de la aduana | CUIDAEXP | Ciudad del exportador |
 | PAISGEN | País origen | ACTECON | Actividad económica |
@@ -125,7 +125,7 @@ En las graficas se puede observar el tipo de transporte que más se usa para rea
 
 8 VIAS NAVEGABLES INTERIORES\
 
-9 OTRO MODO DE TRANSPORTE![](images/Transporte%202019.jpeg) ![](images/Transporte%202020.jpeg) ![](images/Transporte%202021.jpeg) ![](images/Transporte%202022.jpeg)
+9 OTRO MODO DE TRANSPORTE![](images/Transporte%202019.jpeg) ![](images/Transporte%202020.jpeg) ![](images/Transporte%202021.jpeg) ![](images/Transporte%202022.jpeg) ![](images/Transportes.png)
 
 # **5. Conclusiones**
 
