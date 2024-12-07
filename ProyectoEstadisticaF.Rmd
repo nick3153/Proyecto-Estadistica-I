@@ -89,34 +89,23 @@ El primer paso de la limpieza fue ir descargando los archivos ".zip" de cada mes
 
 Cargue de archivos y <data:No> correr:
 
-
 Extracción de columnas de interes especifico con el fin de aligerar el peso de los data frame anteriores y a su vez filtrar por datos relevantes para este proyecto
-
-
 
 Limpieza de datos: PBK, FLETES, VACID, VADUA, "VAFODO"
 
-
 -   **3.4.** Conjunto de datos final: Una vez finalizada la limpieza de datos, debemos mencionar que esta fue realizada a cada uno de los 48 meses con los que trabajamos, por lo tanto, mostramos una vista general de uno de los meses (que se repite en los demás meses)
-
-
 
 -   **3.5.** Proporcione información resumida sobre las variables de interés en su conjunto de datos limpios. No se limite a imprimir un montón de fragmentos de código con str(), summary(), etc. Más bien, proporcione una explicación consolidada, ya sea con una tabla que proporcione información resumida para cada variable o un párrafo de resumen.
 
 Nuestro análisis gráfico abordó todas las variables generales del análisis, sin embargo, un dato que poco estudiamos fue el valor de las Aduana ya que este fluctua por el departamento y su administración política, por lo que de este datos si podemos obtener datos básicos como:
 
-
-
 En la obtención de los datos, se puede ver que promedio de los datos de 2019 y 2020 no hubo tanta variación, en promedio, sin embargo, se puede observar que existieron aduanas donde su cobro máximo alcanzó el valor más alto de los 4 años, reflejando que este costo se llegó a incrementar abismalmente por las medidas de bioseguridad implementadas.
-
 
 Por este lado vemos que el costo de la mercancía en promedio se mantuvo relativamente estable con una disminución notable en 2020 (inicio de pandemia) y que tuvo un posterior pico en 2022 donde la actividad se incrementó, tras investigaciones nuestra conjetura es que durante pandemia mucha gente empezó negocios onlines y las compras en línea (principalmente de mercados internacionales) se incrementó al abrir este ventana digital lo que refleja el impacto de la pandemia que podría llegar a verse como positivo. También podemos ver que los valores más bajos de las mediciiones están en 2020 reflejando la recesión económica por el miedo y la incertidumbre de este hecho. Debemos mencionar que ladesviación estándar demayor magnitud es de 2022, lo que indica una gran diferencia de precios con respecto a la mediana, estopodría indicar que estas nuevas importaciones derivadas de las compras online eran más costosas que aquellas que llegaban normalmente.
 
--   **4.0** NICOLAS:
+-   **Graficas**
 
-Gráficos sobre las frecuencias absolutas de importaciones en cada año:
-
-
+En las siguientes graficas se puede observar el numero de importaciones que se realizaron todos los meses de los años 2019 al 2022.En el grafico del año 2020 se puede observar como la cantidad de importaciones disminuyo drasticamente los meses de Abril, Mayo y Junio, que es cercano a cuando se declaro pandemia en el pais (12 de marzo, 2020), de igual modo e puede observar como eventualmente el número de importaciones empieza a aumentar hasta volver a la normalidad como se puede observar en la ultima grafica con el promedio de importaciones mensuales de cada año, en el que en el año 2020 cayo casi 60000 puntos y al año siguiente aumento hasta que en el 2022 se volvio (y se supero) la cifra del año 2019. ![](images/Frecuencia%202019.jpeg) ![](images/Frecuencia%202020.jpeg) ![](images/Frecuencia%202021.jpeg) ![](images/Frecuencia%202022.jpeg) ![](images/Prom%20Frecuencias.jpeg)
 
 -   **5. Conclusiones** Através de nuestro estudio logramos observar que efectivamente la pandemia comprometió las actividades de importación, siendo reflejado en una **disminución** de frecuencia, del precio total de mercancía y del costo del flete durante el 2020 que fue el año central del suceso, donde podemos llamar al acontecimiento como una recesión económica y después se refleja una alza exponencial dentro de 2021 y 2022 después de pandemia donde los items analizados se dispararon , principalmente en 2022 donde, como comentabamos, tenemos la conjetura que fue por el crecimiento de las compras online lo que llevo a la llegada de muchas más importaciones, probablemente de mayor valor a diferencia de las acostumbradas a llegar.
 
