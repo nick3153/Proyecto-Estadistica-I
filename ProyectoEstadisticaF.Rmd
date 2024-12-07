@@ -108,6 +108,9 @@ Por este lado vemos que el costo de la mercancía en promedio se mantuvo relativ
 
         En las siguientes graficas se puede observar el numero de importaciones que se realizaron todos los meses de los años 2019 al 2022.En el grafico del año 2020 se puede observar como la cantidad de importaciones disminuyo drasticamente los meses de Abril, Mayo y Junio, que es cercano a cuando se declaro pandemia en el pais (12 de marzo, 2020), de igual modo e puede observar como eventualmente el número de importaciones empieza a aumentar hasta volver a la normalidad como se puede observar en la ultima grafica con el promedio de importaciones mensuales de cada año, en el que en el año 2020 cayo casi 60000 puntos y al año siguiente aumento hasta que en el 2022 se volvio (y se supero) la cifra del año 2019. ![](images/Frecuencia%202019.jpeg) ![](images/Frecuencia%202020.jpeg) ![](images/Frecuencia%202021.jpeg) ![](images/Frecuencia%202022.jpeg) ![](images/Prom%20Frecuencias.jpeg)
 
+    -   Valor importado
+En la grafica se puede observar lo que se mencionaba anteriormente, como la actividad de importación desde el exterior vivio un momento de recesión por el momento historico que se vivio (la pandemia por COVID-19) y como esta actividad se recupera poco a poco. Esto destaca la resilencia del comercio internacional despues de haber pasado por un evento disruptivo. ![](images/Valor importación.jpeg)
+
     -   Flete
 
 En la grafica se puede observar como el valor promedio del flete de por año cambia y va en aumenta, pero como se puede observar no es un cambia brusco, por que este cambio podemos supones, que no estan iinfluenciados unica y principalmente por la pandemia, sino que más bien, se debe a una mezcla de factores como lo fueron la pandemia la política nacional e internacional, así como también la producción del pais, exportaciones, etc...(PIB).![](images/Valor%20del%20Flete.jpeg)
