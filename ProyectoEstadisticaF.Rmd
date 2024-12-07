@@ -8,7 +8,7 @@ date: "2024-11-25"
 
 # EDA: Importaciones en Colombia pre, durante y post pandemia de Covid-19
 
-## **1. Introducción**
+### **1. Introducción**
 
 -   **1.1.** Planteamiento
 
@@ -32,25 +32,13 @@ Actualmente nuestra analitica se basa en tener gráficas que nos ayuden a mostra
 
 Esperamos que nuestro análisis ayude al consumidor a ver como las mercancias se comportan en una época de crisis, en qué ciudades receptoras se incrementaron los aranceles y por ende se incrementaron los precios y cuales fueron esos puntos de quiebre que hicieron que los precios se dispararon para poder tener un mejr maneja sobre importaciones en futuras crisis.
 
-## **2. Paquetes de R**
+### **2. Preparación de los datos**
 
-```{r}
-#install.packages("dplyr")
-#install.packages("ggplot2")
-library(ggplot2)
-library(dplyr)
-library(scales)
-library(lsr)
-library(moments)
-```
-
-## **3. Preparación de los datos**
-
--   **3.1.** Obtecnión original de los datos
+-   **2.1.** Obtecnión original de los datos
 
 La base de datos utilizada durante el estudio fue obtenida a través de los recursos virtuales del DANE, la cual proporciona datos publicos en su servicio de *(ANDA)*, donde nos enontramos con un catálogo de nichos de los cuales se proporcionaban archivos de extension ".CSV" con datos de interés; entre las categorías nos inclinamos por la colección de economia-microdatos, por el nicho de economía internacional, donde entre la lista de opciones de censos nos cautivo las *Estadísticas de Importaciones - IMPO - 2012 A 2024* (<https://microdatos.dane.gov.co/index.php/catalog/473/get-microdata>).
 
--   **3.2.** Explicación de datos originales
+-   **2.2.** Explicación de datos originales
 
 Los datos fueron recolectados por el D.A.N.E para garantizar la veracidad y transparencia de la información básica y estratégica para la investigación y los usuarios relacionados con las compras al exterior. Los microdatos registran las importaciones de mercancías legales desde otros países o desde una región portuaria de Colombia al resto del territorio aduanero nacional. Los datos se basan en las en la fecha de presentación.
 
@@ -83,19 +71,9 @@ Algo que también nos parecio curioso es que hay dos variables llamadas Pais de 
 | OTDER | Otros Derechos | RZIMPO | Razón social del importador |
 | CLASE | Clase de importador | DEREL | Derechos Arancelarios |
 
--   **3.3.** Los pasos de importación y limpieza de datos se explican en el texto (dígame por qué realiza las actividades de limpieza de datos que realiza) y siguen un proceso lógico.
 
-El primer paso de la limpieza fue ir descargando los archivos ".zip" de cada mes de cada año para extraer los ".csv" de su año correspondiente gracias a que los archivos están muy bien estandarizados lo cual nos ahorro algo de tiempo. Seguimos importando y extrayendo los datos necesarios a través de R, donde debimos hacer lectura de ".csv" aclarando que el primer año esta separado por "," y los demás años por ";". Además que principalmente en la columna de mercancias y algunos datos aparentemente tipo numérico venian con tipo "character" lo que nos obligo a hacer una limpieza de este item:
 
-Cargue de archivos y <data:No> correr:
-
-Extracción de columnas de interes especifico con el fin de aligerar el peso de los data frame anteriores y a su vez filtrar por datos relevantes para este proyecto
-
-Limpieza de datos: PBK, FLETES, VACID, VADUA, "VAFODO"
-
--   **3.4.** Conjunto de datos final: Una vez finalizada la limpieza de datos, debemos mencionar que esta fue realizada a cada uno de los 48 meses con los que trabajamos, por lo tanto, mostramos una vista general de uno de los meses (que se repite en los demás meses)
-
--   **3.5.** Proporcione información resumida sobre las variables de interés en su conjunto de datos limpios. No se limite a imprimir un montón de fragmentos de código con str(), summary(), etc. Más bien, proporcione una explicación consolidada, ya sea con una tabla que proporcione información resumida para cada variable o un párrafo de resumen.
+-   **2.5.** Información resumida:
 
 Nuestro análisis gráfico abordó todas las variables generales del análisis, sin embargo, un dato que poco estudiamos fue el valor de las Aduana ya que este fluctua por el departamento y su administración política, por lo que de este datos si podemos obtener datos básicos como:
 
@@ -103,10 +81,28 @@ En la obtención de los datos, se puede ver que promedio de los datos de 2019 y 
 
 Por este lado vemos que el costo de la mercancía en promedio se mantuvo relativamente estable con una disminución notable en 2020 (inicio de pandemia) y que tuvo un posterior pico en 2022 donde la actividad se incrementó, tras investigaciones nuestra conjetura es que durante pandemia mucha gente empezó negocios onlines y las compras en línea (principalmente de mercados internacionales) se incrementó al abrir este ventana digital lo que refleja el impacto de la pandemia que podría llegar a verse como positivo. También podemos ver que los valores más bajos de las mediciiones están en 2020 reflejando la recesión económica por el miedo y la incertidumbre de este hecho. Debemos mencionar que ladesviación estándar demayor magnitud es de 2022, lo que indica una gran diferencia de precios con respecto a la mediana, estopodría indicar que estas nuevas importaciones derivadas de las compras online eran más costosas que aquellas que llegaban normalmente.
 
+
+### **3.Metodología**
+El primer paso de la limpieza fue ir descargando los archivos ".zip" de año a través del sitio elegido para obtención de datos (DANE), para extraer los ".csv" de cada mes del año correspondiente gracias a que los archivos están muy bien categorizados,  nos ahorro algo de tiempo. Seguimos importando y extrayendo los datos necesarios a través de R, donde debimos hacer lectura de ".csv" aclarando que el primer año esta separado por ";" y los demás años por ",", este proceso lo hicimos a través de la definción de una ruta base, lo que agiliza el codigo, que es la carpeta principal donde se guardaron todas las importaciones de los 4 años, en nuestra carpeta de drive vera una careta por cada año, lo ideal es que estas cuatros carpetar sean guardadas en una carpeta especifica cuya ruta será la ruta base. Teneindo en cuenta que RStudio no le los carctaeres de la ruta como "/" deben cmabiarse por "\\".
+
+Esto permitio la extracción hacia R de todos los datos de los ".CSV" a nuestro entornono de desarrollo. Una vez hicimos este proceso, continuamos limpiando los data frames originales con las columnas de los datos de interes (PBK, FLETES, VACID, VADUA, "VAFODO", entre otras posibles), obteniendo los ".CSV" limpios con las columnas necesarias a analizar.
+
+Se aplico una función de limpieza de columnas donde se convertian los datos en tipo"carcater" o "numeric" tal fuera necesaio para el análisis, además de eliminar espacios en blanco o datos vacios (NA), tambiés se onvirtieron los carctaeres de tipo "," a tipo "." para su procesaiento con las funciones de R.  
+
+El paso a continuación fue crear un data frame de cada año (tablas_año) donde guardamos las columnas de cda mes en una comluna mayor de su mes correspondiente, esto nos permitio tener un data frame general para cada  año y dandonos acceso rápido a cada los meses correspondientes. 
+
+Extracción de columnas de interes especifico con el fin de aligerar el peso de los data frame anteriores y a su vez filtrar por datos relevantes para este proyecto
+
+
+
+
+
 -   **Graficas**
     -   Frecuencias
 
 En las siguientes graficas se puede observar el numero de importaciones que se realizaron todos los meses de los años 2019 al 2022.En el grafico del año 2020 se puede observar como la cantidad de importaciones disminuyo drasticamente los meses de Abril, Mayo y Junio, que es cercano a cuando se declaro pandemia en el pais (12 de marzo, 2020), de igual modo e puede observar como eventualmente el número de importaciones empieza a aumentar hasta volver a la normalidad como se puede observar en la ultima grafica con el promedio de importaciones mensuales de cada año, en el que en el año 2020 cayo casi 60000 puntos y al año siguiente aumento hasta que en el 2022 se volvio (y se supero) la cifra del año 2019. ![](images/Frecuencia%202019.jpeg) ![](images/Frecuencia%202020.jpeg) ![](images/Frecuencia%202021.jpeg) ![](images/Frecuencia%202022.jpeg) ![](images/Prom%20Frecuencias.jpeg)
+
+
 
 -   **5. Conclusiones** Através de nuestro estudio logramos observar que efectivamente la pandemia comprometió las actividades de importación, siendo reflejado en una **disminución** de frecuencia, del precio total de mercancía y del costo del flete durante el 2020 que fue el año central del suceso, donde podemos llamar al acontecimiento como una recesión económica y después se refleja una alza exponencial dentro de 2021 y 2022 después de pandemia donde los items analizados se dispararon , principalmente en 2022 donde, como comentabamos, tenemos la conjetura que fue por el crecimiento de las compras online lo que llevo a la llegada de muchas más importaciones, probablemente de mayor valor a diferencia de las acostumbradas a llegar.
 

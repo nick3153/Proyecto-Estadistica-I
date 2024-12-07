@@ -519,3 +519,79 @@ for (año_tablas in años) {
   # Mostrar los datos totales por mes y tipo de transporte
   print(transportes_totales)
 }
+
+
+#Transporte Anuales
+# Función para calcular el promedio de transportes por tipo y año
+calcular_promedio_transportes <- function(años_tablas) {
+  promedios_transportes <- list()  # Lista para almacenar los promedios por año
+  
+  for (i in 1:length(años_tablas)) {
+    año_tablas <- años_tablas[[i]]  # Obtener las tablas del año
+    año <- gsub(".*_", "", año_tablas[[1]])  # Extraer el año de las tablas
+    
+    frecuencias_transportes <- list()  # Lista para almacenar las frecuencias de transportes por mes
+    
+    # Bucle para procesar cada mes dentro del año
+    for (mes in año_tablas) {
+      # Obtener los datos de transporte del mes
+      datos_mes <- get(mes)$VIATRANS
+      
+      # Calcular la tabla de frecuencias por tipo de transporte
+      frecuencias <- table(datos_mes)
+      
+      # Convertir a data frame y agregar la columna 'Mes'
+      df_frecuencias <- as.data.frame(frecuencias)
+      colnames(df_frecuencias) <- c("Tipo_Transporte", "Cantidad")
+      
+      # Extraer el mes y el año del nombre de la tabla y agregarlo como columna
+      df_frecuencias$Mes <- gsub("_\\d{4}", "", mes)  # Eliminar el sufijo del año
+      
+      # Agregar la tabla del mes al listado
+      frecuencias_transportes[[mes]] <- df_frecuencias
+    }
+    
+    # Combinar todas las tablas en un solo data frame
+    transportes_totales <- do.call(rbind, frecuencias_transportes)
+    
+    # Sumar las cantidades por tipo de transporte
+    transportes_totales <- transportes_totales %>%
+      group_by(Tipo_Transporte) %>%
+      summarise(Cantidad_Total = sum(Cantidad, na.rm = TRUE)) %>%
+      ungroup()
+    
+    # Calcular el promedio de cada tipo de transporte para este año
+    transportes_totales$Promedio <- transportes_totales$Cantidad_Total / length(año_tablas)
+    
+    # Agregar el año al data frame para la visualización
+    transportes_totales$Año <- año  # Asignar el año a la columna 'Año'
+    
+    # Agregar el promedio al listado
+    promedios_transportes[[i]] <- transportes_totales
+  }
+  
+  # Combinar todos los promedios de los años en un solo data frame
+  promedios_transportes_df <- do.call(rbind, promedios_transportes)
+  
+  return(promedios_transportes_df)
+}
+
+# Calcular los promedios de transportes para cada año
+promedios_transportes_totales <- calcular_promedio_transportes(list(tablas_2019, tablas_2020, tablas_2021, tablas_2022))
+
+# Crear gráfico de barras con ggplot2
+ggplot(promedios_transportes_totales, aes(x = factor(Tipo_Transporte), y = Promedio, fill = factor(Año))) +
+  geom_bar(stat = "identity", position = "dodge", color = "black") +  # Barras sin números
+  scale_fill_brewer(palette = "Purples") +  # Cambiar la paleta de colores a tonos morados
+  theme_minimal() +
+  labs(
+    title = "Promedio de Transportes por Tipo y Año",
+    x = "Tipo de Transporte",
+    y = "Promedio de Transportes",
+    fill = "Año"
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5),  # Centrar el título
+    axis.text.x = element_text(angle = 45, hjust = 1)  # Rotar las etiquetas de los tipos de transporte
+  )
+
