@@ -1,96 +1,12 @@
----
-title: "Proyecto Estadística_Prueba Final"
-output: html_document
-date: "2024-11-25"
----
-
-![](images/istockphoto-1688506060-1024x1024.jpg)
-
-# EDA: Importaciones en Colombia pre, durante y post pandemia de Covid-19
-
-## **1. Introducción**
-
--   **1.1.** Planteamiento
-
-Las importaciones de un país pueden ser el reflejo del estado del mismo, tanto de su economía como de su situación interna, en nuestra exploración de datos observamos que la mayoria son cualittivos y muy pocos son cuantitativos. La base de datos del IDEAM nos proporciona archivos de datos desde 2012 hasta 2024, donde, nos parecio curioso análizar la situación del país en los años de pandemia, 2019 - 2022 podrían darnos una figura de como se manejó el país pre, durante y pos-pandemia; Queremos ver y descubrir ¿cómo este evento global afectó a nuestro país desde el comportamiento de las importaciones?, ¿cómo la afect a los departamentos y ciudades más relevantes del tema?
-
-Donde nuestras diversas hipótesis son: ¿La pandemia en realidad afecto las imprtaciones? ¿que tan significativa fué?
-
--   **1.2.** Abordamiento
-
-Abordamos el problema desde el análisis y comprensión de los datos que estabamos manejando, entender qué significaban sus siglas, que tipos de datos teníamos para trabajar y posteriormente como podíamos presentarlos de modo que reflejarán la situación del contexto.
-
-La metodología se basó en organizar que tipo de gráficas queríamos llegar a obtener, los cálculos que podríamos lograr con los datos que teníamos y su relevancia para el contexto. Así sucesivamente fuimos revisando la teoría vista en clase porque nuestra misión es aplicar lo visto en el curso, por lo qué a medida de que vamos avanzando esperamos obtener más ideas de datos relevantes a analizar.
-
-Por otro lado la creación de estos gráficos y cálculos, se basó en entrar primero al csv original desde una vista de excel e ir identificando que tan limpios estaban los datos y ver que datos debiamos filtrar, cambiar o transdormar (de carcateres a numéricos) si era necesario. El proceso se repetía en cada objetivo que teníamos.
-
--   **1.3.** Enfoque/técnica analítica
-
-Actualmente nuestra analitica se basa en tener gráficas que nos ayuden a mostrar cómo se comportaron las importaciones durante los años de pandemia. Iniciamos con los datos más básicos que nos brinda la base y seguido de esto esperamos sacar probabilidades y conjeturas de cuales fueron los departamentos donde hubo una mayor reducción de las actividades.
-
--   **1.4.** Beneficios al consumidor
-
-Esperamos que nuestro análisis ayude al consumidor a ver como las mercancias se comportan en una época de crisis, en qué ciudades receptoras se incrementaron los aranceles y por ende se incrementaron los precios y cuales fueron esos puntos de quiebre que hicieron que los precios se dispararon para poder tener un mejr maneja sobre importaciones en futuras crisis.
-
-## **2. Paquetes de R**
-
-```{r}
-#install.packages("dplyr")
-#install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("ggplot2")
 library(ggplot2)
 library(dplyr)
 library(scales)
 library(lsr)
 library(moments)
-```
 
-## **3. Preparación de los datos**
-
--   **3.1.** Obtecnión original de los datos
-
-La base de datos utilizada durante el estudio fue obtenida a través de los recursos virtuales del DANE, la cual proporciona datos publicos en su servicio de *(ANDA)*, donde nos enontramos con un catálogo de nichos de los cuales se proporcionaban archivos de extension ".CSV" con datos de interés; entre las categorías nos inclinamos por la colección de economia-microdatos, por el nicho de economía internacional, donde entre la lista de opciones de censos nos cautivo las *Estadísticas de Importaciones - IMPO - 2012 A 2024* (<https://microdatos.dane.gov.co/index.php/catalog/473/get-microdata>).
-
--   **3.2.** Explicación de datos originales
-
-Los datos fueron recolectados por el D.A.N.E para garantizar la veracidad y transparencia de la información básica y estratégica para la investigación y los usuarios relacionados con las compras al exterior. Los microdatos registran las importaciones de mercancías legales desde otros países o desde una región portuaria de Colombia al resto del territorio aduanero nacional. Los datos se basan en las en la fecha de presentación.
-
-Los datos se almacenan en una base de datos proporcionada por ANDA, que cuenta con 44 variables, 20 discretas y 24 continuas. Los datos carecen de clasificación *específica* de las mercancías, lo más cercano es la empresa que recibe la mercancia, para la cantidad de variables se proporciona un diccionario de dato donde los nombres de las variables son acrónimos de su significado sencillos de interpretar.
-
-Algo que también nos parecio curioso es que hay dos variables llamadas Pais de Procedencia (PAISPRO) y Pais de Compra (PAISCOM) que, en algunos casos, son iguales pero en la mayoría de casos es diferente lo que hace pensar que muchas mercancías son hechas en un país (PAISPRO) y son vendidas desde otros pais (PAISCOM), nos parecio curioso.
-
-| Variable | Descripción | Variable | Descripción |
-|----------------|------------------|------------------|------------------|
-| FECH | Fecha de proceso | CUIDAIMP | Ciudad del importador |
-| ADUA | Código de la aduana | CUIDAEXP | Ciudad del exportador |
-| PAISGEN | País origen | ACTECON | Actividad económica |
-| PAISPRO | País de procedencia | CODADAD | Código administración de aduana |
-| PAISCOM | País de compra | VADUA | Valor aduana |
-| DEPTODES | Departamento destino | VRAJUS | Valor ajuste |
-| VIATRANS | Código vía de transporte | BASEIVA | Base IVA |
-| BANDERA | Bandera | OTROSP | Porcentaje otros |
-| REGIMEN | Código de régimen | OTROSBASE | Base otros |
-| ACUERDO | Código del acuerdo | TOTALIVAYO | Total IVA y otros gastos |
-| PBK | Peso bruto en kilos | SEGUROS | Seguros |
-| PNK | Peso neto en kilos | OTROSG | Otros gastos |
-| CANU | Cantidad de unidades | LUIN | Lugar de ingreso |
-| CODA | Código de unidad | CODLUIN | Código lugar de ingreso |
-| NABAN | Posición arancelaria | DEPIM | Departamento del importador |
-| VAFODO | Valor FOB dólares de la mercancía | COPAEX | Código país del exportador |
-| FLETE | Fletes | TIPOIM | Tipo de importación |
-| VACID | Valor CIF dólares de la mercancía | PORARA | Porcentaje de arancel |
-| VACIP | Valor CIF pesos de la mercancía | NIT | Número de identificación Tributaria |
-| IMP1 | Impuesto a las ventas | DIGV | Dígito de Verificación |
-| OTDER | Otros Derechos | RZIMPO | Razón social del importador |
-| CLASE | Clase de importador | DEREL | Derechos Arancelarios |
-
--   **3.3.** Los pasos de importación y limpieza de datos se explican en el texto (dígame por qué realiza las actividades de limpieza de datos que realiza) y siguen un proceso lógico.
-
-El primer paso de la limpieza fue ir descargando los archivos ".zip" de cada mes de cada año para extraer los ".csv" de su año correspondiente gracias a que los archivos están muy bien estandarizados lo cual nos ahorro algo de tiempo. Seguimos importando y extrayendo los datos necesarios a través de R, donde debimos hacer lectura de ".csv" aclarando que el primer año esta separado por "," y los demás años por ";". Además que principalmente en la columna de mercancias y algunos datos aparentemente tipo numérico venian con tipo "character" lo que nos obligo a hacer una limpieza de este item:
-
-Cargue de archivos y <data:No> correr:
-
-```{r}
-# Define la ruta base de los arvhivos
+# Define la ruta base de los archivos
 ruta_base <- "C:/Users/angel/Documents/1. UNIVERSIDAD/5TO SEMESTRE/ESTADISTICA/Proyecto Final"
 
 # Lectura de los archivos 2019
@@ -151,11 +67,8 @@ Octubre_2022 <- read.csv(file.path(ruta_base, "Impo_2022/10. Octubre.csv"), sep 
 Noviembre_2022 <- read.csv(file.path(ruta_base, "Impo_2022/11. Noviembre.csv"), sep = ",")
 Diciembre_2022 <- read.csv(file.path(ruta_base, "Impo_2022/12. Diciembre.csv"), sep = ",")
 
-```
+#Seleccion de las columnas de interes que se requieren para este proyecto utilizando la libreria "dyplr"
 
-Extracción de columnas de interes especifico con el fin de aligerar el peso de los data frame anteriores y a su vez filtrar por datos relevantes para este proyecto
-
-```{r}
 COLUMNAS <- c("PBK", "CODLUIN","DEPTODES", "VIATRANS", "FLETE", "VACID", "VADUA", "VIATRANS") 
 
 #Extraccion de columas exactas para 2019
@@ -210,25 +123,24 @@ Septiembre_2022 <- Septiembre_2022 %>% select(all_of(COLUMNAS))
 Octubre_2022 <- Octubre_2022 %>% select(all_of(COLUMNAS))
 Noviembre_2022 <- Noviembre_2022 %>% select(all_of(COLUMNAS))
 Diciembre_2022 <- Diciembre_2022 %>% select(all_of(COLUMNAS))
-```
 
-Limpieza de datos: PBK, FLETES, VACID, VADUA, "VAFODO"
+#Como algunas de las columnas de las anteriormente seleccionadas tienen datos que son character, se deben pasar de alguna forma rapida y eficiente
+#Sin requerir tanta memoria de la siguiente manera:
 
-```{r}
 # Listas de tablas y columnas para cada año
 tablas_2019 <- c("Enero_2019", "Febrero_2019", "Marzo_2019", "Abril_2019", "Mayo_2019",
-                        "Junio_2019", "Julio_2019", "Agosto_2019", "Septiembre_2019", "Octubre_2019", 
-                        "Noviembre_2019", "Diciembre_2019")
-                        
+                 "Junio_2019", "Julio_2019", "Agosto_2019", "Septiembre_2019", "Octubre_2019", 
+                 "Noviembre_2019", "Diciembre_2019")
+
 tablas_2020 <- c("Enero_2020", "Febrero_2020", "Marzo_2020", "Abril_2020", "Mayo_2020", 
-                        "Junio_2020", "Julio_2020", "Agosto_2020", "Septiembre_2020", "Octubre_2020", 
-                        "Noviembre_2020", "Diciembre_2020")
+                 "Junio_2020", "Julio_2020", "Agosto_2020", "Septiembre_2020", "Octubre_2020", 
+                 "Noviembre_2020", "Diciembre_2020")
 tablas_2021 <- c("Enero_2021", "Febrero_2021", "Marzo_2021", "Abril_2021", "Mayo_2021", 
-                        "Junio_2021", "Julio_2021", "Agosto_2021", "Septiembre_2021", "Octubre_2021", 
-                        "Noviembre_2021", "Diciembre_2021")
+                 "Junio_2021", "Julio_2021", "Agosto_2021", "Septiembre_2021", "Octubre_2021", 
+                 "Noviembre_2021", "Diciembre_2021")
 tablas_2022 <- c("Enero_2022", "Febrero_2022", "Marzo_2022", "Abril_2022", "Mayo_2022", 
-                        "Junio_2022", "Julio_2022", "Agosto_2022", "Septiembre_2022", "Octubre_2022", 
-                        "Noviembre_2022", "Diciembre_2022")
+                 "Junio_2022", "Julio_2022", "Agosto_2022", "Septiembre_2022", "Octubre_2022", 
+                 "Noviembre_2022", "Diciembre_2022")
 info_columnas <- c("PBK", "FLETE", "VACID", "VADUA")
 
 # Función mejorada para convertir las columnas de cada tabla
@@ -258,19 +170,8 @@ convertir_columnas(tablas_2020, info_columnas)
 convertir_columnas(tablas_2021, info_columnas)
 convertir_columnas(tablas_2022, info_columnas)
 
-```
+#Calcular los valores de las aduanas en los años que se seleccionaron en el proyecto 
 
--   **3.4.** Conjunto de datos final: Una vez finalizada la limpieza de datos, debemos mencionar que esta fue realizada a cada uno de los 48 meses con los que trabajamos, por lo tanto, mostramos una vista general de uno de los meses (que se repite en los demás meses)
-
-```{r}
-print(head(Enero_2021,10))
-```
-
--   **3.5.** Proporcione información resumida sobre las variables de interés en su conjunto de datos limpios. No se limite a imprimir un montón de fragmentos de código con str(), summary(), etc. Más bien, proporcione una explicación consolidada, ya sea con una tabla que proporcione información resumida para cada variable o un párrafo de resumen.
-
-Nuestro análisis gráfico abordó todas las variables generales del análisis, sin embargo, un dato que poco estudiamos fue el valor de las Aduana ya que este fluctua por el departamento y su administración política, por lo que de este datos si podemos obtener datos básicos como:
-
-```{r}
 valores_VADUA <- function(tablas_año, año){
   valores_VADUA <- numeric()
   
@@ -299,11 +200,8 @@ VADUA_2022 <- valores_VADUA(tablas_2022, "2022")
 
 # Combinar todos los resúmenes en un solo data frame
 print(resumen_final <- rbind(VADUA_2019, VADUA_2020, VADUA_2021, VADUA_2022))
-```
 
-En la obtención de los datos, se puede ver que promedio de los datos de 2019 y 2020 no hubo tanta variación, en promedio, sin embargo, se puede observar que existieron aduanas donde su cobro máximo alcanzó el valor más alto de los 4 años, reflejando que este costo se llegó a incrementar abismalmente por las medidas de bioseguridad implementadas.
-
-```{r}
+#Calculamos la mercancia total por cada año
 costo_mercancia <- function(tablas_año, año){
   costos_dolares <- numeric()  # Crear un vector vacío para los costos
   
@@ -334,15 +232,7 @@ Costo_2022 <- costo_mercancia(tablas_2022, "2022")
 # Combinamos todos los resúmenes en un solo data frame
 print(rbind(Costo_2019, Costo_2020, Costo_2021,Costo_2022))
 
-```
-
-Por este lado vemos que el costo de la mercancía en promedio se mantuvo relativamente estable con una disminución notable en 2020 (inicio de pandemia) y que tuvo un posterior pico en 2022 donde la actividad se incrementó, tras investigaciones nuestra conjetura es que durante pandemia mucha gente empezó negocios onlines y las compras en línea (principalmente de mercados internacionales) se incrementó al abrir este ventana digital lo que refleja el impacto de la pandemia que podría llegar a verse como positivo. También podemos ver que los valores más bajos de las mediciiones están en 2020 reflejando la recesión económica por el miedo y la incertidumbre de este hecho. Debemos mencionar que ladesviación estándar demayor magnitud es de 2022, lo que indica una gran diferencia de precios con respecto a la mediana, estopodría indicar que estas nuevas importaciones derivadas de las compras online eran más costosas que aquellas que llegaban normalmente.
-
--   **4.0** NICOLAS:
-
-Gráficos sobre las frecuencias absolutas de importaciones en cada año:
-
-```{r}
+#Histogramas
 #Data frame 2019
 datos_2019 <- data.frame(
   Mes = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
@@ -362,11 +252,11 @@ datos_2019 <- data.frame(
     sum(table(Diciembre_2019$CODLUIN))
   )
 )
-#Data frame para el ggplot
+#Data frame para el ggplot de 2019
 datos_2019$Mes <- factor(datos_2019$Mes, levels = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
                                                     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"))
 
-# Crear el gráfico de barras
+#Crear el gráfico de barras
 ggplot(data = datos_2019, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   geom_col(fill = "#310541", color = "black", alpha = 0.7, position = position_dodge(width = 0.9)) +
   labs(title = "Frecuencia de Importaciones mensuales de 2019", x = "Mes", y = "Frecuencia") +
@@ -374,14 +264,11 @@ ggplot(data = datos_2019, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma)
 
-```
-
-```{r}
 #Data frame para el ggplot
 datos_2020$Mes <- factor(datos_2020$Mes, levels = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
                                                     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"))
 
-# Crear el gráfico de barras
+#Crear el gráfico de barras
 ggplot(data = datos_2020, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   geom_col(fill = "#c551ef", color = "black", alpha = 0.7, position = position_dodge(width = 0.9)) +
   labs(title = "Frecuencia de Importaciones mensuales de 2020", x = "Mes", y = "Frecuencia") +
@@ -389,9 +276,6 @@ ggplot(data = datos_2020, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma)
 
-```
-
-```{r}
 #Data frame 2021
 datos_2021 <- data.frame(
   Mes = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
@@ -416,16 +300,14 @@ datos_2021$Mes <- factor(datos_2021$Mes, levels = c("Enero", "Febrero", "Marzo",
                                                     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre",
                                                     "Diciembre"))
 
-#Crear el gráfico de barras
+# Crear el gráfico de barras
 ggplot(data = datos_2021, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   geom_col(fill = "#41018d", color = "black", alpha = 0.7, position = position_dodge(width = 0.9)) +
   labs(title = "Frecuencia de Importaciones mensuales de 2021", x = "Mes", y = "Frecuencia") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma) 
-```
 
-```{r}
 #Data frame 2022
 datos_2022 <- data.frame(
   Mes = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
@@ -457,9 +339,6 @@ ggplot(data = datos_2022, aes(x = Mes, y = FrecuenciaAbsoluta)) +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma)
 
-```
-
-```{r}
 # Calcular los promedio de Mercancía para cada año
 
 # Crear un dataframe consolidado
@@ -480,9 +359,6 @@ ggplot(data = promedios_anuales, aes(x = factor(Año), y = Promedio)) +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = comma)
 
-```
-
-```{r}
 # Función para calcular el total de importaciones por año
 calcular_importacion_total <- function(nombre_tablas) {
   impo_total <- 0
@@ -499,6 +375,8 @@ impo_total_2020 <- calcular_importacion_total(tablas_2020)
 impo_total_2021 <- calcular_importacion_total(tablas_2021)
 impo_total_2022 <- calcular_importacion_total(tablas_2022)
 
+
+#REVISA DESDE AQUI BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU BROU
 # Crear un data frame con las importaciones totales por año
 importaciones_totales <- data.frame(
   Año = c(2019, 2020, 2021, 2022),
@@ -510,14 +388,11 @@ ggplot(importaciones_totales, aes(x = factor(Año), y = Importación_Total)) +
   geom_col(fill = "#2e2050", color = "black", alpha = 0.8) +
   geom_text(aes(label = scales::comma(Importación_Total)), vjust = -0.5, size = 4) +
   theme_minimal() +
-  labs(title = "Precio de Importación en Dolares por Año", x = "Año", y = "Importación Total") +
+  labs(title = "Precio de promedio de Importación por Año (en USD)", x = "Año", y = "Importación Total") +
   theme(
     plot.title = element_text(hjust = 0.5)  # Centrar el título
   )
 
-```
-
-```{r}
 # Función para calcular el total de importaciones por año
 calcular_flete_total <- function(nombre_tablas) {
   flete_total <- 0
@@ -525,6 +400,7 @@ calcular_flete_total <- function(nombre_tablas) {
     temp_tabla <- get(tabla)
     flete_total <- flete_total + sum(temp_tabla$FLETE, na.rm = TRUE)
   }
+  flete_total <- flete_total/length(get[nombre_tablas[1]$FLETE])
   return(flete_total)
 }
 
@@ -551,9 +427,6 @@ ggplot(fletes_totales, aes(x = factor(Año), y = Flete_Total)) +
     plot.title = element_text(hjust = 0.5)  # Centrar el título
   )
 
-```
-
-```{r}
 años <- list(tablas_2019, tablas_2020, tablas_2021, tablas_2022)
 
 for (año_tablas in años) {
@@ -594,27 +467,20 @@ for (año_tablas in años) {
   
   # Graficar con ggplot2
   print(ggplot(transportes_totales, aes(x = Mes, y = Cantidad, fill = factor(Tipo_Transporte))) +
-    geom_bar(stat = "identity", position = "stack", color = "black") +
-    scale_fill_brewer(palette = "Set3") +  # Cambiar la paleta de colores para mejor visualización
-    theme_minimal() +
-    labs(
-      title = paste("Cantidad Total de Transportes por Mes -", año),
-      x = "Mes",
-      y = "Cantidad Total de Transportes",
-      fill = "Tipo de Transporte"
-    ) +
-    theme(
-      axis.text.x = element_text(angle = 45, hjust = 1),  # Rotar las etiquetas de los meses para legibilidad
-      plot.title = element_text(hjust = 0.5)  # Centrar el título
-    ))
+          geom_bar(stat = "identity", position = "stack", color = "black") +
+          scale_fill_brewer(palette = "Set3") +  # Cambiar la paleta de colores para mejor visualización
+          theme_minimal() +
+          labs(
+            title = paste("Cantidad Total de Transportes por Mes -", año),
+            x = "Mes",
+            y = "Cantidad Total de Transportes",
+            fill = "Tipo de Transporte"
+          ) +
+          theme(
+            axis.text.x = element_text(angle = 45, hjust = 1),  # Rotar las etiquetas de los meses para legibilidad
+            plot.title = element_text(hjust = 0.5)  # Centrar el título
+          ))
   
   # Mostrar los datos totales por mes y tipo de transporte
   print(transportes_totales)
 }
-```
-
--   **5. Conclusiones** Através de nuestro estudio logramos observar que efectivamente la pandemia comprometió las actividades de importación, siendo reflejado en una **disminución** de frecuencia, del precio total de mercancía y del costo del flete durante el 2020 que fue el año central del suceso, donde podemos llamar al acontecimiento como una recesión económica y después se refleja una alza exponencial dentro de 2021 y 2022 después de pandemia donde los items analizados se dispararon , principalmente en 2022 donde, como comentabamos, tenemos la conjetura que fue por el crecimiento de las compras online lo que llevo a la llegada de muchas más importaciones, probablemente de mayor valor a diferencia de las acostumbradas a llegar.
-
-También hacemos mención a que las importaciones nos aydaron a reflejar por completo el suceso de pandemia puesto que mostro la excases a finales de 2019 y todo el 2020, el crecimiento inestable de 2020 y el crecimeinto exponencial de 2021 y 2022. Entendemos que las importaciones tambiés se pudieron ver afectadas por otros facores como el ambiental el politico etc...
-
-MENCIONAR LOS MEDIOS DE TRANSPORTE
