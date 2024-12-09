@@ -1,12 +1,26 @@
 ---
-title: "Proyecto Estadística_Prueba Final"
-output: html_document
-date: "2024-11-25"
+title: "EDA: Importaciones en Colombia pre, durante y post pandemia de Covid-19"
+output:
+  pdf_document: default
+  html_document: default
+date: "2024-12-7"
 ---
 
-![](images/istockphoto-1688506060-1024x1024.jpg)
+**REALIZACIÓN A:** 
 
-# EDA: Importaciones en Colombia pre, durante y post pandemia de Covid-19
+- Estadística I
+
+- Universidad Industrial de Santander
+
+- Profesor: Hoover R. Chacón
+
+- Ingeniería de Sistemas
+
+- **Participantes:**
+  - Angela Lozano\
+  - Jose Quintero\  
+  - Nicolas Quinter\
+
 
 ### **1. Introducción**
 
@@ -95,15 +109,21 @@ Extracción de columnas de interes especifico con el fin de aligerar el peso de 
 
 -   Frecuencias
 
-    En las siguientes graficas se puede observar el numero de importaciones que se realizaron todos los meses de los años 2019 al 2022.En el grafico del año 2020 se puede observar como la cantidad de importaciones disminuyo drasticamente los meses de Abril, Mayo y Junio, que es cercano a cuando se declaro pandemia en el pais (12 de marzo, 2020), de igual modo e puede observar como eventualmente el número de importaciones empieza a aumentar hasta volver a la normalidad como se puede observar en la ultima grafica con el promedio de importaciones mensuales de cada año, en el que en el año 2020 cayo casi 60000 puntos y al año siguiente aumento hasta que en el 2022 se volvio (y se supero) la cifra del año 2019. ![](images/Frecuencia%202019.jpeg) ![](images/Frecuencia%202020.jpeg) ![](images/Frecuencia%202021.jpeg) ![](images/Frecuencia%202022.jpeg) ![](images/Prom%20Frecuencias.jpeg)
+    En las siguientes graficas se puede observar el numero de importaciones que se realizaron todos los meses de los años 2019 al 2022.En el grafico del año 2020 se puede observar como la cantidad de importaciones disminuyo drasticamente los meses de Abril, Mayo y Junio, que es cercano a cuando se declaro pandemia en el pais (12 de marzo, 2020), de igual modo e puede observar como eventualmente el número de importaciones empieza a aumentar hasta volver a la normalidad como se puede observar en la ultima grafica con el promedio de importaciones mensuales de cada año, en el que en el año 2020 cayo casi 60000 puntos y al año siguiente aumento hasta que en el 2022 se volvio (y se supero) la cifra del año 2019.
+
+    ![](images/Frecuencia%202019.jpeg) ![](images/Frecuencia%202020.jpeg) ![](images/Frecuencia%202021.jpeg) ![](images/Frecuencia%202022.jpeg) ![](images/Prom%20Frecuencias.jpeg)
 
 -   Valor importado
 
-En la grafica se puede observar lo que se mencionaba anteriormente, como la actividad de importación desde el exterior vivio un momento de recesión por el momento historico que se vivio (la pandemia por COVID-19) y como esta actividad se recupera poco a poco. Esto destaca la resilencia del comercio internacional despues de haber pasado por un evento disruptivo. ![](images/Valor%20importación.jpeg)
+En la grafica se puede observar lo que se mencionaba anteriormente, como la actividad de importación desde el exterior vivio un momento de recesión por el momento historico que se vivio (la pandemia por COVID-19) y como esta actividad se recupera poco a poco. Esto destaca la resilencia del comercio internacional despues de haber pasado por un evento disruptivo.
+
+![](images/Valor%20importación.jpeg)
 
 -   Flete
 
-En la grafica se puede observar como el valor promedio del flete de por año cambia y va en aumenta, pero como se puede observar no es un cambia brusco, por que este cambio podemos supones, que no estan iinfluenciados unica y principalmente por la pandemia, sino que más bien, se debe a una mezcla de factores como lo fueron la pandemia la política nacional e internacional, así como también la producción del pais, exportaciones, etc...(PIB).![](images/Valor%20del%20Flete.jpeg)
+En la grafica se puede observar como el valor promedio del flete de por año cambia y va en aumenta, pero como se puede observar no es un cambia brusco, por que este cambio podemos supones, que no estan iinfluenciados unica y principalmente por la pandemia, sino que más bien, se debe a una mezcla de factores como lo fueron la pandemia la política nacional e internacional, así como también la producción del pais, exportaciones, etc...(PIB).
+
+![](images/Valor%20del%20Flete.jpeg)
 
 -   Tipo de transporte
 
@@ -125,7 +145,7 @@ En las graficas se puede observar el tipo de transporte que más se usa para rea
 
 8 VIAS NAVEGABLES INTERIORES\
 
-9 OTRO MODO DE TRANSPORTE![](images/Transporte%202019.jpeg) ![](images/Transporte%202020.jpeg) ![](images/Transporte%202021.jpeg) ![](images/Transporte%202022.jpeg) ![](images/Transportes.png)
+9 OTRO MODO DE TRANSPORTE ![](images/Transporte%202019.jpeg) ![](images/Transporte%202020.jpeg) ![](images/Transporte%202021.jpeg) ![](images/Transporte%202022.jpeg) ![](images/Transportes.png)
 
 # **5. Conclusiones**
 
