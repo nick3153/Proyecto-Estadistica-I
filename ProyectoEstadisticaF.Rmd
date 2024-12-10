@@ -6,21 +6,23 @@ output:
 date: "2024-12-7"
 ---
 
-**REALIZACIÓN A:** 
+![](images/Portada.jpg)
 
-- Estadística I
+**REALIZACIÓN A:**
 
-- Universidad Industrial de Santander
+-   Estadística I
 
-- Profesor: Hoover R. Chacón
+-   Universidad Industrial de Santander
 
-- Ingeniería de Sistemas
+-   Profesor: Hoover R. Chacón
 
-- **Participantes:**
-  - Angela Lozano\
-  - Jose Quintero\  
-  - Nicolas Quinter\
+-   Ingeniería de Sistemas
 
+-   **Participantes:**
+
+    -   Angela Lozano\
+    -   Jose Quintero\
+    -   Nicolas Quinter\
 
 ### **1. Introducción**
 
@@ -36,7 +38,7 @@ Abordamos el problema desde el análisis y comprensión de los datos que estabam
 
 La metodología se basó en organizar que tipo de gráficas queríamos llegar a obtener, los cálculos que podríamos lograr con los datos que teníamos y su relevancia para el contexto. Así sucesivamente fuimos revisando la teoría vista en clase porque nuestra misión es aplicar lo visto en el curso, por lo qué a medida de que vamos avanzando esperamos obtener más ideas de datos relevantes a analizar.
 
-Por otro lado la creación de estos gráficos y cálculos, se basó en entrar primero al csv original desde una vista de excel e ir identificando que tan limpios estaban los datos y ver que datos debiamos filtrar, cambiar o transdormar (de carcateres a numéricos) si era necesario. El proceso se repetía en cada objetivo que teníamos.
+Por otro lado la creación de estos gráficos y cálculos, se basó en entrar primero al csv original desde una vista de excel e ir identificando que tan limpios estaban los datos y ver que datos debiamos filtrar, cambiar o transdormar (de carcatéres a numéricos) si era necesario. El proceso se repetía en cada objetivo que teníamos.
 
 -   **1.3.** Enfoque/técnica analítica
 
@@ -97,8 +99,7 @@ Por este lado vemos que el costo de la mercancía en promedio se mantuvo relativ
 
 El primer paso de la limpieza fue ir descargando los archivos ".zip" de año a través del sitio elegido para obtención de datos (DANE), para extraer los ".csv" de cada mes del año correspondiente gracias a que los archivos están muy bien categorizados, nos ahorro algo de tiempo. Seguimos importando y extrayendo los datos necesarios a través de R, donde debimos hacer lectura de ".csv" aclarando que el primer año esta separado por ";" y los demás años por ",", este proceso lo hicimos a través de la definción de una ruta base, lo que agiliza el codigo, que es la carpeta principal donde se guardaron todas las importaciones de los 4 años, en nuestra carpeta de drive vera una careta por cada año, lo ideal es que estas cuatros carpetar sean guardadas en una carpeta especifica cuya ruta será la ruta base. **Tener en cuenta que RStudio no le los carctaeres de la ruta base como "/" deben cmabiarse por "\\".**
 
-Para ellos podemos utlizar el siguiente link correspondiente a la ruta de la carpeta central de datos de nuestros proyecto, esta será la carpeta que usted tendrá que descargar: 
-https://drive.google.com/drive/folders/1ou38pJWfGS9dWFPaS7dAxu8rQbPt7LkJ?usp=sharing
+Para ellos podemos utlizar el siguiente link correspondiente a la ruta de la carpeta central de datos de nuestros proyecto, esta será la carpeta que usted tendrá que descargar:
 
 Y desde su computador o dispositivo tendrá que captar la ruta de esta carpeta dónde haya destinado guardarla y colocarla como guía en la ruta base haciendo el cambio respectivo en la ruta base y, no olvidarlo, **cambiar los carcteres "/" por "\\" para una lectura correcta de los archivos.**
 
@@ -113,11 +114,12 @@ Extracción de columnas de interes especifico con el fin de aligerar el peso de 
 # **4. Resultados**
 
 -   Aduanas
+
 Podemos ver que el valor de las aduanas que es regulado por la DIAN en nuestro país y que se ve afectado por varios factores como acuerdos internacionales y los que más queremos resaltar que fueron los directamente afectados por la pandemia: el precio de compra de las mercancías y gastos relacionados con la carga, descarga y manipulación de las mercancías en el puerto o lugar de importación.
 
 Podemo ver como podemos encontramos mercancia con valor mínimo de 0, lo puede significar varias cosas, las más comunes exención aranclaria (no paga impuestos) o son donaciones o ayudas, que en el caso de Colombia tuvimos bastantes especialemnte entre 2020 y 2021 cuando la pandemia fue más abrasiva, estas donaciones llegan a desvíar el promedio o nos muestran como en los años 2019 y 2020 se mantuvieron muy similares, lo que podemos pensar que el promedio del valor de las aduanas se vieron bastante aectadas por estas donaciones, incluso el 2021 hubo una subida leve pero finalmente fue en 2022 donde podemos ver el salto de casi 3000 dolares de difernecia en el promedio que fue el año que dejamos de recibir donaciones magnificadas por la pandemia.
 
-
+![](images/DF_Val_Aduanas.png)
 
 -   Frecuencias
 
@@ -125,17 +127,15 @@ Podemo ver como podemos encontramos mercancia con valor mínimo de 0, lo puede s
 
     ![](images/Frecuencia%202019.jpeg) ![](images/Frecuencia%202020.jpeg) ![](images/Frecuencia%202021.jpeg) ![](images/Frecuencia%202022.jpeg) ![](images/Prom%20Frecuencias.jpeg)
 
--   Valor importado
+-   Valor importado En la grafica se puede observar lo que se mencionaba anteriormente, como la actividad de importación desde el exterior vivioun momento de recesión por el momento historico que se vivio (la pandemia por COVID-19) y como esta actividad se recupera poco a poco. Esto destaca la resilencia del comercio internacional despues de haber pasado por un evento disruptivo.
 
-En la grafica se puede observar lo que se mencionaba anteriormente, como la actividad de importación desde el exterior vivio un momento de recesión por el momento historico que se vivio (la pandemia por COVID-19) y como esta actividad se recupera poco a poco. Esto destaca la resilencia del comercio internacional despues de haber pasado por un evento disruptivo.
-
-![](images/Valor importación.jpeg)
+![](images/Valor%20importación.jpeg)
 
 -   Flete
 
 En la grafica se puede observar como el valor promedio del flete de por año cambia y va en aumenta, pero como se puede observar no es un cambia brusco, por que este cambio podemos supones, que no estan iinfluenciados unica y principalmente por la pandemia, sino que más bien, se debe a una mezcla de factores como lo fueron la pandemia la política nacional e internacional, así como también la producción del pais, exportaciones, etc...(PIB).
 
-![](images/Valor del Flete.jpeg)
+![](images/Valor%20del%20Flete.jpeg)
 
 -   Tipo de transporte
 
@@ -157,12 +157,9 @@ En las graficas se puede observar el tipo de transporte que más se usa para rea
 
 8 VIAS NAVEGABLES INTERIORES\
 
-9 OTRO MODO DE TRANSPORTE 
-![](images/Transporte%202019.jpeg) 
-![](images/Transporte%202020.jpeg) 
-![](images/Transporte%202021.jpeg) 
-![](images/Transporte%202022.jpeg) 
-![](images/Transportes.png)
+9 OTRO MODO DE TRANSPORTE
+
+![](images/Transporte%202019.jpeg) ![](images/Transporte%202020.jpeg) ![](images/Transporte%202021.jpeg) ![](images/Transporte%202022.jpeg) ![](images/Transportes.png)
 
 # **5. Conclusiones**
 
