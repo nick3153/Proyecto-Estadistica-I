@@ -95,9 +95,14 @@ Por este lado vemos que el costo de la mercancía en promedio se mantuvo relativ
 
 ### **3.Metodología**
 
-El primer paso de la limpieza fue ir descargando los archivos ".zip" de año a través del sitio elegido para obtención de datos (DANE), para extraer los ".csv" de cada mes del año correspondiente gracias a que los archivos están muy bien categorizados, nos ahorro algo de tiempo. Seguimos importando y extrayendo los datos necesarios a través de R, donde debimos hacer lectura de ".csv" aclarando que el primer año esta separado por ";" y los demás años por ",", este proceso lo hicimos a través de la definción de una ruta base, lo que agiliza el codigo, que es la carpeta principal donde se guardaron todas las importaciones de los 4 años, en nuestra carpeta de drive vera una careta por cada año, lo ideal es que estas cuatros carpetar sean guardadas en una carpeta especifica cuya ruta será la ruta base. Teneindo en cuenta que RStudio no le los carctaeres de la ruta como "/" deben cmabiarse por "\\".
+El primer paso de la limpieza fue ir descargando los archivos ".zip" de año a través del sitio elegido para obtención de datos (DANE), para extraer los ".csv" de cada mes del año correspondiente gracias a que los archivos están muy bien categorizados, nos ahorro algo de tiempo. Seguimos importando y extrayendo los datos necesarios a través de R, donde debimos hacer lectura de ".csv" aclarando que el primer año esta separado por ";" y los demás años por ",", este proceso lo hicimos a través de la definción de una ruta base, lo que agiliza el codigo, que es la carpeta principal donde se guardaron todas las importaciones de los 4 años, en nuestra carpeta de drive vera una careta por cada año, lo ideal es que estas cuatros carpetar sean guardadas en una carpeta especifica cuya ruta será la ruta base. **Tener en cuenta que RStudio no le los carctaeres de la ruta base como "/" deben cmabiarse por "\\".**
 
-Esto permitio la extracción hacia R de todos los datos de los ".CSV" a nuestro entornono de desarrollo. Una vez hicimos este proceso, continuamos limpiando los data frames originales con las columnas de los datos de interes (PBK, FLETES, VACID, VADUA, "VAFODO", entre otras posibles), obteniendo los ".CSV" limpios con las columnas necesarias a analizar.
+Para ellos podemos utlizar el siguiente link correspondiente a la ruta de la carpeta central de datos de nuestros proyecto, esta será la carpeta que usted tendrá que descargar: 
+https://drive.google.com/drive/folders/1ou38pJWfGS9dWFPaS7dAxu8rQbPt7LkJ?usp=sharing
+
+Y desde su computador o dispositivo tendrá que captar la ruta de esta carpeta dónde haya destinado guardarla y colocarla como guía en la ruta base haciendo el cambio respectivo en la ruta base y, no olvidarlo, **cambiar los carcteres "/" por "\\" para una lectura correcta de los archivos.**
+
+Esto permite la extracción hacia R de todos los datos de los ".CSV" al entorno de desarrollo. Una vez hicimos este proceso, continuamos limpiando los data frames originales con las columnas de los datos de interes (PBK, FLETES, VACID, VADUA, "VAFODO", entre otras posibles), obteniendo los ".CSV" limpios con las columnas necesarias a analizar.
 
 Se aplico una función de limpieza de columnas donde se convertian los datos en tipo"carcater" o "numeric" tal fuera necesaio para el análisis, además de eliminar espacios en blanco o datos vacios (NA), tambiés se onvirtieron los carctaeres de tipo "," a tipo "." para su procesaiento con las funciones de R.
 
@@ -107,9 +112,16 @@ Extracción de columnas de interes especifico con el fin de aligerar el peso de 
 
 # **4. Resultados**
 
+-   Aduanas
+Podemos ver que el valor de las aduanas que es regulado por la DIAN en nuestro país y que se ve afectado por varios factores como acuerdos internacionales y los que más queremos resaltar que fueron los directamente afectados por la pandemia: el precio de compra de las mercancías y gastos relacionados con la carga, descarga y manipulación de las mercancías en el puerto o lugar de importación.
+
+Podemo ver como podemos encontramos mercancia con valor mínimo de 0, lo puede significar varias cosas, las más comunes exención aranclaria (no paga impuestos) o son donaciones o ayudas, que en el caso de Colombia tuvimos bastantes especialemnte entre 2020 y 2021 cuando la pandemia fue más abrasiva, estas donaciones llegan a desvíar el promedio o nos muestran como en los años 2019 y 2020 se mantuvieron muy similares, lo que podemos pensar que el promedio del valor de las aduanas se vieron bastante aectadas por estas donaciones, incluso el 2021 hubo una subida leve pero finalmente fue en 2022 donde podemos ver el salto de casi 3000 dolares de difernecia en el promedio que fue el año que dejamos de recibir donaciones magnificadas por la pandemia.
+
+
+
 -   Frecuencias
 
-    En las siguientes graficas se puede observar el numero de importaciones que se realizaron todos los meses de los años 2019 al 2022.En el grafico del año 2020 se puede observar como la cantidad de importaciones disminuyo drasticamente los meses de Abril, Mayo y Junio, que es cercano a cuando se declaro pandemia en el pais (12 de marzo, 2020), de igual modo e puede observar como eventualmente el número de importaciones empieza a aumentar hasta volver a la normalidad como se puede observar en la ultima grafica con el promedio de importaciones mensuales de cada año, en el que en el año 2020 cayo casi 60000 puntos y al año siguiente aumento hasta que en el 2022 se volvio (y se supero) la cifra del año 2019.
+    En las siguientes graficas se puede observar el numero de importaciones que se realizaron todos los meses de los años 2019 al 2022.En el grafico del año 2020 se puede observar como la cantidad de importaciones disminuyo drasticamente los meses de Abril, Mayo y Junio, que es cercano a cuando se declaro pandemia en el pais (12 de marzo, 2020), de igual modo se puede observar como eventualmente el número de importaciones empieza a aumentar hasta volver a la normalidad como se puede observar en la ultima grafica con el promedio de importaciones mensuales de cada año, en el que en el año 2020 cayo casi 60000 puntos y al año siguiente aumento hasta que en el 2022 se volvio (y se superó) la cifra del año 2019.
 
     ![](images/Frecuencia%202019.jpeg) ![](images/Frecuencia%202020.jpeg) ![](images/Frecuencia%202021.jpeg) ![](images/Frecuencia%202022.jpeg) ![](images/Prom%20Frecuencias.jpeg)
 
@@ -117,13 +129,13 @@ Extracción de columnas de interes especifico con el fin de aligerar el peso de 
 
 En la grafica se puede observar lo que se mencionaba anteriormente, como la actividad de importación desde el exterior vivio un momento de recesión por el momento historico que se vivio (la pandemia por COVID-19) y como esta actividad se recupera poco a poco. Esto destaca la resilencia del comercio internacional despues de haber pasado por un evento disruptivo.
 
-![](images/Valor%20importación.jpeg)
+![](images/Valor importación.jpeg)
 
 -   Flete
 
 En la grafica se puede observar como el valor promedio del flete de por año cambia y va en aumenta, pero como se puede observar no es un cambia brusco, por que este cambio podemos supones, que no estan iinfluenciados unica y principalmente por la pandemia, sino que más bien, se debe a una mezcla de factores como lo fueron la pandemia la política nacional e internacional, así como también la producción del pais, exportaciones, etc...(PIB).
 
-![](images/Valor%20del%20Flete.jpeg)
+![](images/Valor del Flete.jpeg)
 
 -   Tipo de transporte
 
@@ -145,7 +157,12 @@ En las graficas se puede observar el tipo de transporte que más se usa para rea
 
 8 VIAS NAVEGABLES INTERIORES\
 
-9 OTRO MODO DE TRANSPORTE ![](images/Transporte%202019.jpeg) ![](images/Transporte%202020.jpeg) ![](images/Transporte%202021.jpeg) ![](images/Transporte%202022.jpeg) ![](images/Transportes.png)
+9 OTRO MODO DE TRANSPORTE 
+![](images/Transporte%202019.jpeg) 
+![](images/Transporte%202020.jpeg) 
+![](images/Transporte%202021.jpeg) 
+![](images/Transporte%202022.jpeg) 
+![](images/Transportes.png)
 
 # **5. Conclusiones**
 
